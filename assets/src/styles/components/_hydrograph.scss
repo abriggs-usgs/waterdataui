@@ -266,6 +266,11 @@ $highlight: $color-gray-lightest;
         .pump-mask {
             fill: #3498db;
         }
+
+        .watermark {
+            opacity:0.2;
+            height: 20%;
+        }
     }
 
 }
