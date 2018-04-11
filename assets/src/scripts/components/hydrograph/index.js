@@ -326,9 +326,7 @@ const timeSeriesGraph = function (elem) {
             })
         .append('svg:image')
         .attr('class', 'watermark')
-        .attr('xlink:href', 'https://upload.wikimedia.org/wikipedia/commons/1/1c/USGS_logo_green.svg')
-        .attr('x', 300)
-        .attr('y', 200);
+        .attr('xlink:href', 'https://upload.wikimedia.org/wikipedia/commons/1/1c/USGS_logo_green.svg');
 
 
     elem.call(link(plotSeriesSelectTable, createStructuredSelector({
