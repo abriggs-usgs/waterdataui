@@ -8,8 +8,7 @@ import {
     hasAnyTimeSeries,
     getMonitoringLocationName,
     getAgencyCode,
-    getUserInputTimeRangeSelectionButton,
-    getUserInputCustomTimeRangeSelectionButton,
+    getUserInputsForSelectingTimespan,
     getCurrentVariable,
     getQueryInfo,
     getRequests,
@@ -24,8 +23,7 @@ import {
     getNwisTimeZone,
     getAllMethodsForCurrentVariable,
     getCurrentVariableTimeSeries,
-    getTimeSeriesForTsKey,
-    getUserInputNumberOfDays
+    getTimeSeriesForTsKey
 } from './time-series-selector';
 
 const TEST_DATA = {
@@ -474,23 +472,21 @@ describe('monitoring-location/selectors/time-series-selector', () => {
         });
     });
 
-    describe('getUserInputTimeRangeSelectionButton', () => {
-        it('Returns the timespan radio button that is checked in the main list', () => {
-            expect(getUserInputTimeRangeSelectionButton({
+    describe('getTimespanUserInputs', () => {
+        it('Returns the an object with user input selections for  time ranges', () => {
+            expect(getUserInputsForSelectingTimespan({
                 ivTimeSeriesState: {
-                    userInputTimeRangeSelectionButton: 'custom'
+                    userInputsForTimeRange: {
+                        mainTimeRangeSelectionButton: 'custom',
+                        customTimeRangeSelectionButton: 'days-input',
+                        numberOfDaysFieldValue: '3'
+                    }
                 }
-            })).toEqual('custom');
-        });
-    });
-
-    describe('getUserInputTimeRangeSelectionButton', () => {
-        it('Returns the timespan radio button that is checked in the subselection custom list', () => {
-            expect(getUserInputCustomTimeRangeSelectionButton({
-                ivTimeSeriesState: {
-                    userInputCustomTimeRangeSelectionButton: 'calender-input'
-                }
-            })).toEqual('calender-input');
+            })).toEqual({
+                mainTimeRangeSelectionButton: 'custom',
+                customTimeRangeSelectionButton: 'days-input',
+                numberOfDaysFieldValue: '3'
+            });
         });
     });
 
@@ -1149,16 +1145,6 @@ describe('monitoring-location/selectors/time-series-selector', () => {
 
         it('should return null the empty set if no time series for the selected key exist', () => {
             expect(getTimeSeriesForTsKey('compare:P7D')(TEST_DATA)).toEqual({});
-        });
-    });
-
-    describe('getUserInputNumberOfDays', () => {
-        it('Returns the number of days from today the user entered in the custom timeframe subselection form field', () => {
-            expect(getUserInputNumberOfDays({
-                ivTimeSeriesState: {
-                    userInputNumberOfDays: '22'
-                }
-            })).toEqual('22');
         });
     });
 });
