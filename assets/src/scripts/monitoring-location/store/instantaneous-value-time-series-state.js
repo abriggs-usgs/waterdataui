@@ -309,7 +309,7 @@ export const ivTimeSeriesStateReducer = function(ivTimeSeriesState={}, action) {
             const timespanInputSettings = {};
             timespanInputSettings[action.key] = action.value;
             return Object.assign({}, ivTimeSeriesState, {
-                timespanUserInputs: Object.assign({}, ivTimeSeriesState.timespanUserInputs, timespanInputSettings)
+                userInputsForTimeRange: Object.assign({}, ivTimeSeriesState.userInputsForTimeRange, timespanInputSettings)
             });
         }
 
