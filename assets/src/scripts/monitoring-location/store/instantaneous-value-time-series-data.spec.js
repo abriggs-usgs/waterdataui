@@ -361,7 +361,7 @@ describe('monitoring-location/store/instantaneous-value-time-series-data module'
                 expect(url).toContain('endDT=');
             });
 
-            it('Loading key should be set for this time series before fetch is complete and current date range kind set to custo', () => {
+            it('Loading key should be set for this time series before fetch is complete and current date range kind set to custom', () => {
                 store.dispatch(Actions.retrieveCustomIVTimeSeries('12345678', startDT, endDT));
 
                 const tsState = store.getState().ivTimeSeriesState;

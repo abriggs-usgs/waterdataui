@@ -112,14 +112,20 @@ const setUserInputNumberOfDays = function(userInputNumberOfDays) {
     };
 };
 
-const setUserInputs = function(userInputTimeRangeSelectionButton, userInputCustomTimeRangeSelectionButton, userInputNumberOfDays) {
-    const state = getState().ivTimeSeriesState;
-
+/*
+ * Synchronous action sets
+ * @param {String} key which is one of the three following options
+ * - customTimeRangeSelectionButton - one of two selections for custom time periods, either 'days-input' or 'calender-input'
+ * - timeRangeSelectionButton - one of the four main timeframe selections, 'P7D', 'P30D', 'P1Y', or 'custom'
+ * - inputNumberOfDays - number of days from today that is entered in the form field for 'days before today' on the custom date range menu.
+ * @param {String} a value suitable for the above mentioned keys
+ * @return {Object} - Redux action
+ */
+const setUserInputsForSelectingTimespan = function(key, value) {
     return {
-        type: 'SET_USER_INPUTS',
-        userInputTimeRangeSelectionButton,
-        userInputCustomTimeRangeSelectionButton,
-        userInputNumberOfDays
+        type: 'SET_USER_INPUTS_FOR_SELECTING_TIMESPAN',
+        key,
+        value
     };
 };
 
@@ -299,15 +305,13 @@ export const ivTimeSeriesStateReducer = function(ivTimeSeriesState={}, action) {
                 userInputNumberOfDays: action.userInputNumberOfDays
             };
 
-        case 'SET_USER_INPUTS':
-            return {
-                ...ivTimeSeriesState,
-                userInputs: {
-                    userInputTimeRangeSelectionButton: action.userInputTimeRangeSelectionButton,
-                    userInputCustomTimeRangeSelectionButton: action.userInputTimeRangeSelectionButton,
-                    userInputNumberOfDays: action.userInputNumberOfDays
-                }
-            };
+        case 'SET_USER_INPUTS_FOR_SELECTING_TIMESPAN': {
+            const timespanInputSettings = {};
+            timespanInputSettings[action.key] = action.value;
+            return Object.assign({}, ivTimeSeriesState, {
+                timespanUserInputs: Object.assign({}, ivTimeSeriesState.timespanUserInputs, timespanInputSettings)
+            });
+        }
 
         case 'SET_IV_GRAPH_CURSOR_OFFSET':
             return {
@@ -368,7 +372,7 @@ export const Actions = {
     setUserInputTimeRangeSelectionButton,
     setUserInputCustomTimeRangeSelectionButton,
     setUserInputNumberOfDays,
-    setUserInputs,
+    setUserInputsForSelectingTimespan,
     setIVGraphCursorOffset,
     setIVGraphBrushOffset,
     clearIVGraphBrushOffset,
