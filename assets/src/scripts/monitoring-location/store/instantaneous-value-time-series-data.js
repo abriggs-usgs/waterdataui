@@ -203,7 +203,8 @@ const retrieveCustomTimePeriodIVTimeSeries = function(siteno, parameterCd, perio
                 const variableToDraw = find(variables, v =>  v.variableCode.value === parameterCd);
                 dispatch(Actions.addIVTimeSeriesCollection(collection));
                 dispatch(ivTimeSeriesStateActions.setUserInputTimeRangeSelectionButton('custom'));
-                dispatch(ivTimeSeriesStateActions.setUserInputCustomTimeRangeSelectionButton('days-input'));
+                dispatch(ivTimeSeriesStateActions.setUserInputsForSelectingTimespan('customTimeRangeSelectionButton', 'days-input'));
+                dispatch(ivTimeSeriesStateActions.setUserInputCustomTimeRangeSelectionButton('days-input')); //remove
                 dispatch(ivTimeSeriesStateActions.setCurrentIVVariable(variableToDraw.variableCode.variableID.toString()));
                 dispatch(ivTimeSeriesStateActions.removeIVTimeSeriesFromLoadingKeys([tsRequestKey]));
             },
@@ -252,7 +253,8 @@ const retrieveCustomIVTimeSeries = function(siteno, startTime, endTime, parmCd=n
                 dispatch(Actions.addIVTimeSeriesCollection(collection));
                 dispatch(ivTimeSeriesStateActions.setCurrentIVDateRange('custom'));
                 dispatch(ivTimeSeriesStateActions.setUserInputTimeRangeSelectionButton('custom'));
-                dispatch(ivTimeSeriesStateActions.setUserInputCustomTimeRangeSelectionButton('calender-input'));
+                dispatch(ivTimeSeriesStateActions.setUserInputsForSelectingTimespan('customTimeRangeSelectionButton', 'calender-input'));
+                dispatch(ivTimeSeriesStateActions.setUserInputCustomTimeRangeSelectionButton('calender-input')); //remove
                 dispatch(ivTimeSeriesStateActions.removeIVTimeSeriesFromLoadingKeys([tsRequestKey]));
             },
             () => {
