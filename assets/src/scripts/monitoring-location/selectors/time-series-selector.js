@@ -21,6 +21,8 @@ export const getQueryInfo = state => state.ivTimeSeriesData.queryInfo || {};
 
 export const getRequests = state => state.ivTimeSeriesData.requests || {};
 
+
+
 export const getUserInputTimeRangeSelectionButton = state => state.ivTimeSeriesState.userInputTimeRangeSelectionButton; //remove
 
 export const getUserInputCustomTimeRangeSelectionButton = state => state.ivTimeSeriesState.userInputCustomTimeRangeSelectionButton; //remove

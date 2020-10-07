@@ -203,10 +203,12 @@ const retrieveCustomTimePeriodIVTimeSeries = function(siteno, parameterCd, perio
                 const variables = Object.values(collection.variables);
                 const variableToDraw = find(variables, v =>  v.variableCode.value === parameterCd);
                 dispatch(Actions.addIVTimeSeriesCollection(collection));
-                dispatch(ivTimeSeriesStateActions.setUserInputNumberOfDays('mainTimeRangeSelectionButton', 'custom'));
-                dispatch(ivTimeSeriesStateActions.setUserInputTimeRangeSelectionButton('custom')); //remove
+                dispatch(ivTimeSeriesStateActions.setUserInputsForSelectingTimespan('mainTimeRangeSelectionButton', 'custom'));
                 dispatch(ivTimeSeriesStateActions.setUserInputsForSelectingTimespan('customTimeRangeSelectionButton', 'days-input'));
+
+                dispatch(ivTimeSeriesStateActions.setUserInputTimeRangeSelectionButton('custom')); //remove
                 dispatch(ivTimeSeriesStateActions.setUserInputCustomTimeRangeSelectionButton('days-input')); //remove
+
                 dispatch(ivTimeSeriesStateActions.setCurrentIVVariable(variableToDraw.variableCode.variableID.toString()));
                 dispatch(ivTimeSeriesStateActions.removeIVTimeSeriesFromLoadingKeys([tsRequestKey]));
             },

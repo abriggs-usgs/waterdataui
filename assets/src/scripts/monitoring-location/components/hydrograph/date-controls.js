@@ -64,8 +64,16 @@ export const drawDateRangeControls = function(elem, store, siteno) {
     const containerRadioGroupAndFormButtons = elem.insert('div', ':nth-child(3)')
         .attr('class', 'container-radio-group-and-form-buttons')
         .call(link(store, (container, userInputTimeRangeSelectionButton) => {
+            console.log('userInputTimeRangeSelectionButton', userInputTimeRangeSelectionButton)
             container.attr('hidden', userInputTimeRangeSelectionButton === 'custom' ? null : true);
         }, getUserInputTimeRangeSelectionButton));
+
+
+
+// .call(link(store, (container, userInputsForSelectingTimespan) => {
+//     console.log('other', userInputsForSelectingTimespan.mainTimeRangeSelectionButton)
+//         container.attr('hidden', userInputsForSelectingTimespan.mainTimeRangeSelectionButton === 'custom' ? null : true);
+//     }, getUserInputsForSelectingTimespan));
 
     const containerRadioGroupCustomSelectButtons = containerRadioGroupAndFormButtons.append('div')
         .attr('id', 'ts-custom-date-radio-group')
@@ -88,10 +96,10 @@ export const drawDateRangeControls = function(elem, store, siteno) {
         .attr('role', 'customdate')
         .attr('class', 'usa-form')
         .attr('aria-label', 'Custom date specification')
-        .call(link(store, (container, {userInputTimeRangeSelectionButton, userInputCustomTimeRangeSelectionButton}) => {
-            container.attr('hidden', userInputCustomTimeRangeSelectionButton === 'calender-input' && userInputTimeRangeSelectionButton === 'custom' ? null : true);
+        .call(link(store, (container, {userInputsForSelectingTimespan, userInputCustomTimeRangeSelectionButton}) => {
+            container.attr('hidden', userInputCustomTimeRangeSelectionButton === 'calender-input' && userInputsForSelectingTimespan.mainTimeRangeSelectionButton === 'custom' ? null : true);
         }, createStructuredSelector({
-            userInputTimeRangeSelectionButton: getUserInputTimeRangeSelectionButton,
+            userInputsForSelectingTimespan: getUserInputsForSelectingTimespan,
             userInputCustomTimeRangeSelectionButton: getUserInputCustomTimeRangeSelectionButton
         })));
 
