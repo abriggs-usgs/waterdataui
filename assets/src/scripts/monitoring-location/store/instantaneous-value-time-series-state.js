@@ -77,7 +77,7 @@ const setCustomIVTimeRange = function(startTime, endTime) {
  * such as 'P7D, P1Y, or custom'
  * @return {Object} - Redux action
  */
-const setUserInputTimeRangeSelectionButton = function(userInputTimeRangeSelectionButton) {
+const setUserInputTimeRangeSelectionButton = function(userInputTimeRangeSelectionButton) { //remove
     return {
         type: 'SET_USER_INPUT_TIME_RANGE_SELECTION_BUTTON',
         userInputTimeRangeSelectionButton
@@ -92,7 +92,7 @@ const setUserInputTimeRangeSelectionButton = function(userInputTimeRangeSelectio
  * such as 'days-input' or 'calender-input'
  * @return {Object} - Redux action
  */
-const setUserInputCustomTimeRangeSelectionButton = function(userInputCustomTimeRangeSelectionButton) {
+const setUserInputCustomTimeRangeSelectionButton = function(userInputCustomTimeRangeSelectionButton) {  //remove
     return {
         type: 'SET_USER_INPUT_CUSTOM_TIME_RANGE_SELECTION_BUTTON',
         userInputCustomTimeRangeSelectionButton
@@ -105,7 +105,7 @@ const setUserInputCustomTimeRangeSelectionButton = function(userInputCustomTimeR
  * @param {Number} userInputNumberOfDays - the number of days
  * @return {Object} - Redux action
  */
-const setUserInputNumberOfDays = function(userInputNumberOfDays) {
+const setUserInputNumberOfDays = function(userInputNumberOfDays) { //remove
     return {
         type: 'SET_USER_INPUT_NUMBER_OF_DAYS',
         userInputNumberOfDays
@@ -116,8 +116,8 @@ const setUserInputNumberOfDays = function(userInputNumberOfDays) {
  * Synchronous action sets
  * @param {String} key which is one of the three following options
  * - customTimeRangeSelectionButton - one of two selections for custom time periods, either 'days-input' or 'calender-input'
- * - timeRangeSelectionButton - one of the four main timeframe selections, 'P7D', 'P30D', 'P1Y', or 'custom'
- * - inputNumberOfDays - number of days from today that is entered in the form field for 'days before today' on the custom date range menu.
+ * - mainTimeRangeSelectionButton - one of the four main timeframe selections, 'P7D', 'P30D', 'P1Y', or 'custom'
+ * - numberOfDaysFieldValue - number of days from today that is entered in the form field for 'days before today' on the custom date range menu.
  * @param {String} a value suitable for the above mentioned keys
  * @return {Object} - Redux action
  */
