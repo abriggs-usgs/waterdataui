@@ -8,12 +8,12 @@
  */
 
 import './mock-service-data';
-import './polyfills';
+import 'ui/polyfills';
 
-import './ajax.spec';
-import './schema.spec';
-import './tooltips.spec';
-import './utils.spec';
+import 'ui/ajax.spec';
+import 'ui/schema.spec';
+import 'ui/tooltips.spec';
+import 'ui/utils.spec';
 
 import './d3-rendering/accessibility.spec';
 import './d3-rendering/alerts.spec';
