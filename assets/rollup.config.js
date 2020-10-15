@@ -21,9 +21,17 @@ const getBundleConfig = function(src, dest) {
         input: src,
         plugins: [
         alias({
-            entries: {
+            entries: [{
                 ui: path.resolve(__dirname, 'src/scripts')
-            },
+            }, {
+                ml: path.resolve(__dirname, 'src/scripts/monitoring-location')
+            },{
+                network: path.resolve(__dirname, 'src/scripts/network')
+            },{
+                dvhydrograph: path.resolve(__dirname, 'src/scripts/monitoring-location/components/daily-value-hydrograph')
+            },{
+                ivhydrograph: path.resolve(__dirname, 'src/scripts/monitoring-location/components/hydrograph')
+            }],
             customResolver: resolve.nodeResolve({
                 extensions: ['.js', '.json']
             })
