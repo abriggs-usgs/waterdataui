@@ -1,9 +1,9 @@
 import {line as d3Line} from 'd3-shape';
 import {createStructuredSelector} from 'reselect';
 
-import {addSVGAccessibility} from '../../../d3-rendering/accessibility';
-import {appendAxes} from '../../../d3-rendering/axes';
-import {renderMaskDefs} from '../../../d3-rendering/data-masks';
+import {addSVGAccessibility} from '../../.d3rendering/accessibility';
+import {appendAxes} from '../../.d3rendering/axes';
+import {renderMaskDefs} from '../../.d3rendering/data-masks';
 import {link} from '../../../lib/d3-redux';
 
 import {getXAxis, getYAxis} from './selectors/axes';

@@ -1,8 +1,8 @@
 import {DateTime} from 'luxon';
 import {createStructuredSelector} from 'reselect';
 
-import {drawCursorSlider} from '../../../d3-rendering/cursor-slider';
-import {drawFocusCircles, drawFocusOverlay, drawFocusLine} from '../../../d3-rendering/graph-tooltip';
+import {drawCursorSlider} from '../../.d3rendering/cursor-slider';
+import {drawFocusCircles, drawFocusOverlay, drawFocusLine} from '../../.d3rendering/graph-tooltip';
 import {link} from '../../../lib/d3-redux';
 import {getDVGraphCursorOffset, getCurrentDVTimeSeriesUnitOfMeasure} from '../../selectors/daily-value-time-series-selector';
 import {Actions} from '../../store/daily-value-time-series';

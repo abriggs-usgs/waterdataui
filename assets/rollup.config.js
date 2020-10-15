@@ -23,10 +23,18 @@ const getBundleConfig = function(src, dest) {
         alias({
             entries: [{
                 ui: path.resolve(__dirname, 'src/scripts')
-            }, {
+            },{
                 ml: path.resolve(__dirname, 'src/scripts/monitoring-location')
             },{
                 network: path.resolve(__dirname, 'src/scripts/network')
+            },{
+                leaflet: path.resolve(__dirname, 'src/scripts/leaflet')
+            },{
+                webservices: path.resolve(__dirname, 'src/scripts/web-services')
+            },{
+                lib: path.resolve(__dirname, 'src/scripts/lib')
+            },{
+                d3rendering: path.resolve(__dirname, 'src/scripts/d3-rendering')
             },{
                 dvhydrograph: path.resolve(__dirname, 'src/scripts/monitoring-location/components/daily-value-hydrograph')
             },{

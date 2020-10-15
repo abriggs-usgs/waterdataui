@@ -2,7 +2,7 @@ import {axisBottom, axisLeft, axisRight} from 'd3-axis';
 import memoize from 'fast-memoize';
 import {createSelector} from 'reselect';
 
-import {generateTimeTicks} from '../../../../d3-rendering/tick-marks';
+import {generateTimeTicks} from '../../../.d3rendering/tick-marks';
 import {getCurrentDateRange, getCurrentParmCd} from '../../../selectors/time-series-selector';
 import {convertCelsiusToFahrenheit, convertFahrenheitToCelsius} from '../../../../utils';
 

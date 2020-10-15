@@ -3,7 +3,7 @@ import {default as thunk} from 'redux-thunk';
 
 import {MOCK_OBSERVATION_ITEM} from '../../mock-service-data';
 
-import {Actions, networkDataReducer} from './network';
+import {Actions, networkDataReducer} from 'network';
 
 describe('monitoring-location/store/network module', () => {
     /* eslint no-use-before-define: 0 */

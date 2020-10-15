@@ -1,6 +1,6 @@
 import {createSelector} from 'reselect';
 
-import {defineLineMarker, defineRectangleMarker, defineTextOnlyMarker} from '../../../../d3-rendering/markers';
+import {defineLineMarker, defineRectangleMarker, defineTextOnlyMarker} from '../../../.d3rendering/markers';
 
 import {getCurrentUniqueDataKinds} from './time-series-data';
 

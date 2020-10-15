@@ -3,7 +3,7 @@ import {default as thunk} from 'redux-thunk';
 
 import {fetchNetworkFeatures} from '../../web-services/network-data';
 
-import {networkDataReducer as networkData} from './network-data-reducer';
+import {networkDataReducer as networkData} from 'network-data-reducer';
 
 export const Actions = {
     retrieveNetworkData(networkCd) {

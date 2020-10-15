@@ -5,8 +5,8 @@ import {select} from 'd3-selection';
 import {createStructuredSelector} from 'reselect';
 
 import config from '../../../config.js';
-import {drawWarningAlert, drawInfoAlert} from '../../../d3-rendering/alerts';
-import {drawLoadingIndicator} from '../../../d3-rendering/loading-indicator';
+import {drawWarningAlert, drawInfoAlert} from '../../.d3rendering/alerts';
+import {drawLoadingIndicator} from '../../.d3rendering/loading-indicator';
 import {link} from '../../../lib/d3-redux';
 
 import {hasAnyTimeSeries, getCurrentParmCd, getVariables} from '../../selectors/time-series-selector';

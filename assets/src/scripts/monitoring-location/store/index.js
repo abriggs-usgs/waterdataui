@@ -12,7 +12,7 @@ import {ivTimeSeriesStateReducer as ivTimeSeriesState} from './instantaneous-val
 import {statisticsDataReducer as statisticsData} from './statistics-data';
 import {timeZoneReducer as ianaTimeZone} from './time-zone';
 import {uiReducer as ui} from './ui-state';
-import {networkDataReducer as networkData} from './network';
+import {networkDataReducer as networkData} from 'network';
 
 const appReducer = combineReducers({
     ivTimeSeriesData,

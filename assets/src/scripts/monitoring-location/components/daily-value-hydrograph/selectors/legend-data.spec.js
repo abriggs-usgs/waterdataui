@@ -1,4 +1,4 @@
-import {lineMarker, rectangleMarker, textOnlyMarker} from '../../../../d3-rendering/markers';
+import {lineMarker, rectangleMarker, textOnlyMarker} from '../../../.d3rendering/markers';
 
 import {getLegendMarkers} from './legend-data';
 

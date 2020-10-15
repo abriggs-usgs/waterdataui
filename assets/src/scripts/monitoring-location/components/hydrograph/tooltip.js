@@ -5,8 +5,8 @@ import {DateTime} from 'luxon';
 import {createSelector, createStructuredSelector} from 'reselect';
 
 import config from '../../../config';
-import {drawCursorSlider} from '../../../d3-rendering/cursor-slider';
-import {drawFocusOverlay, drawFocusCircles, drawFocusLine} from '../../../d3-rendering/graph-tooltip';
+import {drawCursorSlider} from '../../.d3rendering/cursor-slider';
+import {drawFocusOverlay, drawFocusCircles, drawFocusLine} from '../../.d3rendering/graph-tooltip';
 import {link} from '../../../lib/d3-redux';
 import {mediaQuery, convertCelsiusToFahrenheit, convertFahrenheitToCelsius} from '../../../utils';
 

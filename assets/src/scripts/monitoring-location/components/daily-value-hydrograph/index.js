@@ -5,8 +5,8 @@ import includes from 'lodash/includes';
 import {getAvailableDVTimeSeries, getAllDVTimeSeries} from '../../selectors/daily-value-time-series-selector';
 import {Actions} from '../../store/daily-value-time-series';
 
-import {drawErrorAlert, drawInfoAlert} from '../../../d3-rendering/alerts';
-import {drawLoadingIndicator} from '../../../d3-rendering/loading-indicator';
+import {drawErrorAlert, drawInfoAlert} from '../../.d3rendering/alerts';
+import {drawLoadingIndicator} from '../../.d3rendering/loading-indicator';
 
 import {drawGraphBrush} from './graph-brush';
 import {drawGraphControls} from './graph-controls';

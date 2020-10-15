@@ -2,7 +2,7 @@ import {set} from 'd3-collection';
 import memoize from 'fast-memoize';
 import {createSelector} from 'reselect';
 
-import {defineLineMarker, defineRectangleMarker, defineTextOnlyMarker} from '../../../../d3-rendering/markers';
+import {defineLineMarker, defineRectangleMarker, defineTextOnlyMarker} from '../../../.d3rendering/markers';
 
 import {getWaterwatchFloodLevels, isWaterwatchVisible} from '../../../selectors/flood-data-selector';
 import {getCurrentVariableMedianMetadata} from '../../../selectors/median-statistics-selector';
