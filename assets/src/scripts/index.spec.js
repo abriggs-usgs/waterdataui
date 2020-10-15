@@ -7,7 +7,7 @@
  * time, and `karma --watch` tasks are very fast.
  */
 
-import './mock-service-data';
+import 'ui/mock-service-data';
 import 'ui/polyfills';
 
 import 'ui/ajax.spec';
@@ -31,15 +31,15 @@ import './leaflet-rendering/legend-control.spec';
 
 import './lib/d3-redux.spec';
 
-import './monitoring-location/components/daily-value-hydrograph/selectors/labels.spec';
-import './monitoring-location/components/daily-value-hydrograph/selectors/legend-data.spec';
-import './monitoring-location/components/daily-value-hydrograph/selectors/scales.spec';
-import './monitoring-location/components/daily-value-hydrograph/selectors/time-series-data.spec';
-import './monitoring-location/components/daily-value-hydrograph/graph-brush.spec';
-import './monitoring-location/components/daily-value-hydrograph/graph-controls.spec';
-import './monitoring-location/components/daily-value-hydrograph/index.spec';
-import './monitoring-location/components/daily-value-hydrograph/time-series-graph.spec';
-import './monitoring-location/components/daily-value-hydrograph/tooltip.spec';
+import 'dvhydrograph/selectors/labels.spec';
+import 'dvhydrograph/selectors/legend-data.spec';
+import 'dvhydrograph/selectors/scales.spec';
+import 'dvhydrograph/selectors/time-series-data.spec';
+import 'dvhydrograph/graph-brush.spec';
+import 'dvhydrograph/graph-controls.spec';
+import 'dvhydrograph/index.spec';
+import 'dvhydrograph/time-series-graph.spec';
+import 'dvhydrograph/tooltip.spec';
 
 import './monitoring-location/components/embed.spec';
 
