@@ -22,23 +22,23 @@ const getBundleConfig = function(src, dest) {
         plugins: [
         alias({
             entries: [{
-                ui: path.resolve(__dirname, 'src/scripts')
+                find: 'ui', replacement: path.resolve(__dirname, 'src/scripts')
             },{
-                ml: path.resolve(__dirname, 'src/scripts/monitoring-location')
+                find: 'ml', replacement: path.resolve(__dirname, 'src/scripts/monitoring-location')
             },{
-                network: path.resolve(__dirname, 'src/scripts/network')
+                find: 'network', replacement: path.resolve(__dirname, 'src/scripts/network')
             },{
-                leaflet: path.resolve(__dirname, 'src/scripts/leaflet')
+                find: 'leaflet', replacement: path.resolve(__dirname, 'src/scripts/leaflet')
             },{
-                webservices: path.resolve(__dirname, 'src/scripts/web-services')
+                find: 'webservices', replacement: path.resolve(__dirname, 'src/scripts/web-services')
             },{
-                lib: path.resolve(__dirname, 'src/scripts/lib')
+                find: 'lib', replacement: path.resolve(__dirname, 'src/scripts/lib')
             },{
-                d3rendering: path.resolve(__dirname, 'src/scripts/d3-rendering')
+                find:'d3rendering', replacement: path.resolve(__dirname, 'src/scripts/d3-rendering')
             },{
-                dvhydrograph: path.resolve(__dirname, 'src/scripts/monitoring-location/components/daily-value-hydrograph')
+                find: 'dvhydrograph', replacement: path.resolve(__dirname, 'src/scripts/monitoring-location/components/daily-value-hydrograph')
             },{
-                ivhydrograph: path.resolve(__dirname, 'src/scripts/monitoring-location/components/hydrograph')
+                find: 'ivhydrograph', replacement: path.resolve(__dirname, 'src/scripts/monitoring-location/components/hydrograph')
             }],
             customResolver: resolve.nodeResolve({
                 extensions: ['.js', '.json']
