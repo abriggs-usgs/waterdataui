@@ -76,15 +76,15 @@ import 'ml/selectors/median-statistics-selector.spec';
 import 'ml/selectors/time-series-selector.spec';
 import 'ml/selectors/time-zone-selector.spec';
 
-import './monitoring-location/store/daily-value-time-series.spec';
-import './monitoring-location/store/flood-inundation.spec';
-import './monitoring-location/store/instantaneous-value-time-series-data.spec';
-import './monitoring-location/store/instantaneous-value-time-series-state.spec';
-import './monitoring-location/store/network.spec';
-import './monitoring-location/store/nldi-data.spec';
-import './monitoring-location/store/statistics-data.spec';
-import './monitoring-location/store/time-zone.spec';
-import './monitoring-location/store/ui-state.spec';
+import 'ml/store/daily-value-time-series.spec';
+import 'ml/store/flood-inundation.spec';
+import 'ml/store/instantaneous-value-time-series-data.spec';
+import 'ml/store/instantaneous-value-time-series-state.spec';
+import 'ml/store/network.spec';
+import 'ml/store/nldi-data.spec';
+import 'ml/store/statistics-data.spec';
+import 'ml/store/time-zone.spec';
+import 'ml/store/ui-state.spec';
 
 import './monitoring-location/url-params.spec';
 import './network/components/network-sites/data-table.spec';
