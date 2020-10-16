@@ -28,12 +28,6 @@ const getBundleConfig = function(src, dest) {
                 },{
                     find: 'network', replacement: path.resolve(__dirname, 'src/scripts/network')
                 },{
-                    find: 'leaflet', replacement: path.resolve(__dirname, 'src/scripts/leaflet')
-                },{
-                    find: 'webservices', replacement: path.resolve(__dirname, 'src/scripts/web-services')
-                },{
-                    find: 'lib', replacement: path.resolve(__dirname, 'src/scripts/lib')
-                },{
                     find:'d3render', replacement: path.resolve(__dirname, 'src/scripts/d3-rendering')
                 },{
                     find: 'dvhydrograph', replacement: path.resolve(__dirname, 'src/scripts/monitoring-location/components/daily-value-hydrograph')

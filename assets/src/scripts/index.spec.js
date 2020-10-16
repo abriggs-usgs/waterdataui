@@ -26,10 +26,10 @@ import 'd3render/loading-indicator.spec';
 import 'd3render/markers.spec';
 import 'd3render/tick-marks.spec';
 
-import './leaflet-rendering/map.spec';
-import './leaflet-rendering/legend-control.spec';
+import 'ui/leaflet-rendering/map.spec';
+import 'ui/leaflet-rendering/legend-control.spec';
 
-import './lib/d3-redux.spec';
+import 'ui/lib/d3-redux.spec';
 
 import 'dvhydrograph/selectors/labels.spec';
 import 'dvhydrograph/selectors/legend-data.spec';
@@ -51,18 +51,18 @@ import 'ivhydrograph/selectors/parameter-data.spec';
 import 'ivhydrograph/selectors/scales.spec';
 import 'ivhydrograph/selectors/time-series-data.spec';
 
-import './monitoring-location/components/hydrograph/audible.spec';
-import './monitoring-location/components/hydrograph/date-controls.spec';
-import './monitoring-location/components/hydrograph/data-table.spec';
-import './monitoring-location/components/hydrograph/graph-brush.spec';
-import './monitoring-location/components/hydrograph/graph-controls.spec';
-import './monitoring-location/components/hydrograph/hydrograph-utils.spec';
-import './monitoring-location/components/hydrograph/index.spec';
-import './monitoring-location/components/hydrograph/legend.spec';
-import './monitoring-location/components/hydrograph/method-picker.spec';
-import './monitoring-location/components/hydrograph/parameters.spec';
-import './monitoring-location/components/hydrograph/time-series-graph.spec';
-import './monitoring-location/components/hydrograph/tooltip.spec';
+import 'ivhydrograph/audible.spec';
+import 'ivhydrograph/date-controls.spec';
+import 'ivhydrograph/data-table.spec';
+import 'ivhydrograph/graph-brush.spec';
+import 'ivhydrograph/graph-controls.spec';
+import 'ivhydrograph/hydrograph-utils.spec';
+import 'ivhydrograph/index.spec';
+import 'ivhydrograph/legend.spec';
+import 'ivhydrograph/method-picker.spec';
+import 'ivhydrograph/parameters.spec';
+import 'ivhydrograph/time-series-graph.spec';
+import 'ivhydrograph/tooltip.spec';
 
 import './monitoring-location/components/map/flood-slider.spec';
 import './monitoring-location/components/map/index.spec';
@@ -94,9 +94,9 @@ import 'network/selectors/network-data-selector.spec';
 import 'network/store/index.spec';
 import 'network/store/network-data-reducer.spec';
 
-import './web-services/flood-data.spec';
-import './web-services/models.spec';
-import './web-services/network-data.spec';
-import './web-services/nldi-data.spec';
-import './web-services/observations.spec';
-import './web-services/statistics-data.spec';
+import 'ui/web-services/flood-data.spec';
+import 'ui/web-services/models.spec';
+import 'ui/web-services/network-data.spec';
+import 'ui/web-services/nldi-data.spec';
+import 'ui/web-services/observations.spec';
+import 'ui/web-services/statistics-data.spec';
