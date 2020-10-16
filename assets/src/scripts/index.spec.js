@@ -68,13 +68,13 @@ import './monitoring-location/components/map/flood-slider.spec';
 import './monitoring-location/components/map/index.spec';
 import './monitoring-location/components/map/legend.spec';
 
-import './monitoring-location/selectors/daily-value-time-series-selector.spec';
-import './monitoring-location/selectors/flood-data-selector.spec';
-import './monitoring-location/selectors/network-selector.spec';
-import './monitoring-location/selectors/nldi-data-selector.spec';
-import './monitoring-location/selectors/median-statistics-selector.spec';
-import './monitoring-location/selectors/time-series-selector.spec';
-import './monitoring-location/selectors/time-zone-selector.spec';
+import 'ml/selectors/daily-value-time-series-selector.spec';
+import 'ml/selectors/flood-data-selector.spec';
+import 'ml/selectors/network-selector.spec';
+import 'ml/selectors/nldi-data-selector.spec';
+import 'ml/selectors/median-statistics-selector.spec';
+import 'ml/selectors/time-series-selector.spec';
+import 'ml/selectors/time-zone-selector.spec';
 
 import './monitoring-location/store/daily-value-time-series.spec';
 import './monitoring-location/store/flood-inundation.spec';
