@@ -92,6 +92,8 @@ const getBundleConfig = function(src, dest) {
 
 module.exports = [
     getBundleConfig('src/scripts/monitoring-location/index.js', 'dist/bundle.js'),
+    getBundleConfig('src/scripts/monitoring-location/components/hydrograph/index.js', 'dist/bundle.js'),
+    getBundleConfig('src/scripts/monitoring-location/components/daily-value-hydrograph/index.js', 'dist/bundle.js'),
     getBundleConfig('src/scripts/network/index.js', 'dist/network-bundle.js')
 ];
 
