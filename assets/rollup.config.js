@@ -34,7 +34,7 @@ const getBundleConfig = function(src, dest) {
                 },{
                     find: 'lib', replacement: path.resolve(__dirname, 'src/scripts/lib')
                 },{
-                    find:'d3rendering', replacement: path.resolve(__dirname, 'src/scripts/d3-rendering')
+                    find:'d3render', replacement: path.resolve(__dirname, 'src/scripts/d3-rendering')
                 },{
                     find: 'dvhydrograph', replacement: path.resolve(__dirname, 'src/scripts/monitoring-location/components/daily-value-hydrograph')
                 },{
@@ -92,6 +92,7 @@ const getBundleConfig = function(src, dest) {
 
 module.exports = [
     getBundleConfig('src/scripts/monitoring-location/index.js', 'dist/bundle.js'),
+    getBundleConfig('src/scripts/d3-rendering/index.js', 'dist/bundle.js'),
     getBundleConfig('src/scripts/monitoring-location/components/hydrograph/index.js', 'dist/bundle.js'),
     getBundleConfig('src/scripts/monitoring-location/components/daily-value-hydrograph/index.js', 'dist/bundle.js'),
     getBundleConfig('src/scripts/network/index.js', 'dist/network-bundle.js')

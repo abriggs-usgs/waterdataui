@@ -15,16 +15,16 @@ import 'ui/schema.spec';
 import 'ui/tooltips.spec';
 import 'ui/utils.spec';
 
-import './d3-rendering/accessibility.spec';
-import './d3-rendering/alerts.spec';
-import './d3-rendering/axes.spec';
-import './d3-rendering/cursor-slider.spec';
-import './d3-rendering/data-masks.spec';
-import './d3-rendering/graph-tooltip.spec';
-import './d3-rendering/legend.spec';
-import './d3-rendering/loading-indicator.spec';
-import './d3-rendering/markers.spec';
-import './d3-rendering/tick-marks.spec';
+import 'd3render/accessibility.spec';
+import 'd3render/alerts.spec';
+import 'd3render/axes.spec';
+import 'd3render/cursor-slider.spec';
+import 'd3render/data-masks.spec';
+import 'd3render/graph-tooltip.spec';
+import 'd3render/legend.spec';
+import 'd3render/loading-indicator.spec';
+import 'd3render/markers.spec';
+import 'd3render/tick-marks.spec';
 
 import './leaflet-rendering/map.spec';
 import './leaflet-rendering/legend-control.spec';
