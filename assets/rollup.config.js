@@ -86,9 +86,9 @@ const getBundleConfig = function(src, dest) {
 
 module.exports = [
     getBundleConfig('src/scripts/monitoring-location/index.js', 'dist/bundle.js'),
-    getBundleConfig('src/scripts/d3-rendering/index.js', 'dist/bundle.js'),
-    getBundleConfig('src/scripts/monitoring-location/components/hydrograph/index.js', 'dist/bundle.js'),
-    getBundleConfig('src/scripts/monitoring-location/components/daily-value-hydrograph/index.js', 'dist/bundle.js'),
+    getBundleConfig('src/scripts/d3-rendering/index.js', 'dist/d3render-bundle.js'),
+    getBundleConfig('src/scripts/monitoring-location/components/hydrograph/index.js', 'dist/ivhydrograph-bundle.js'),
+    getBundleConfig('src/scripts/monitoring-location/components/daily-value-hydrograph/index.js', 'dist/dvhydrograph-bundle.js'),
     getBundleConfig('src/scripts/network/index.js', 'dist/network-bundle.js')
 ];
 

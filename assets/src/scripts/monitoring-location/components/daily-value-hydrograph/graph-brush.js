@@ -2,7 +2,7 @@ import {brushX} from 'd3-brush';
 import {event} from 'd3-selection';
 import {createStructuredSelector} from 'reselect';
 
-import {appendXAxis} from '../../../d3-rendering/axes';
+import {appendXAxis} from 'd3render/axes';
 import {link} from '../../../lib/d3-redux';
 import {getDVGraphBrushOffset} from '../../selectors/daily-value-time-series-selector';
 import {Actions} from '../../store/daily-value-time-series';
@@ -13,8 +13,8 @@ import {getBrushXScale, getBrushYScale} from './selectors/scales';
 import {getCurrentTimeSeriesSegments} from './selectors/time-series-data';
 
 import {drawDataSegments} from './time-series-graph';
-import {mediaQuery} from '../../../utils';
-import config from '../../../config';
+import {mediaQuery} from 'ui/utils';
+import config from 'ui/config';
 
 /*
  * Renders a brush element within container for the daily value graph
