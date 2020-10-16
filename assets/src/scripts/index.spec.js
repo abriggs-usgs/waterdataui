@@ -7,7 +7,7 @@
  * time, and `karma --watch` tasks are very fast.
  */
 
-import './mock-service-data';
+import 'ui/mock-service-data';
 import 'ui/polyfills';
 
 import 'ui/ajax.spec';
@@ -64,9 +64,9 @@ import 'ivhydrograph/parameters.spec';
 import 'ivhydrograph/time-series-graph.spec';
 import 'ivhydrograph/tooltip.spec';
 
-import './monitoring-location/components/map/flood-slider.spec';
-import './monitoring-location/components/map/index.spec';
-import './monitoring-location/components/map/legend.spec';
+import 'ml/components/map/flood-slider.spec';
+import 'ml/components/map/index.spec';
+import 'ml/components/map/legend.spec';
 
 import 'ml/selectors/daily-value-time-series-selector.spec';
 import 'ml/selectors/flood-data-selector.spec';
@@ -86,7 +86,7 @@ import 'ml/store/statistics-data.spec';
 import 'ml/store/time-zone.spec';
 import 'ml/store/ui-state.spec';
 
-import './monitoring-location/url-params.spec';
+import 'ml/url-params.spec';
 import 'network/components/network-sites/data-table.spec';
 import 'network/components/network-sites/index.spec';
 import 'network/components/network-sites/legend.spec';
