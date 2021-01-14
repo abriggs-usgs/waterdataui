@@ -100,6 +100,7 @@ export const plotSeriesSelectTable = function(elem,
     }, store) {
     // Get the position of the scrolled window before removing it so it can be set to the same value.
     const lastTable = elem.select('#select-time-series table');
+    console.log('elem ', elem)
     const scrollTop = lastTable.size() ? lastTable.property('scrollTop') : null;
     elem.select('#select-time-series').remove();
 
@@ -222,4 +223,12 @@ export const plotSeriesSelectTable = function(elem,
             });
         }
     });
+
+    // Add option to plot second parameter
+    const secondParameterSelectionContainer = tableContainer.append('div')
+        .attr('id', 'select-second-parameter');
+    secondParameterSelectionContainer.append('div')
+        .attr('class', 'select-second-parameter-accordion usa-accordion')
+        .append('h2')
+            .attr('')
 };
