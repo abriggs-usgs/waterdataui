@@ -100,7 +100,6 @@ export const plotSeriesSelectTable = function(elem,
     }, store) {
     // Get the position of the scrolled window before removing it so it can be set to the same value.
     const lastTable = elem.select('#select-time-series table');
-    console.log('elem ', elem)
     const scrollTop = lastTable.size() ? lastTable.property('scrollTop') : null;
 
     elem.select('#select-time-series').remove();
@@ -192,7 +191,7 @@ export const plotSeriesSelectTable = function(elem,
         let selection = select(this);
 
         if (config.WATER_ALERT_PARAMETER_CODES.includes(d.parameterCode.replace(config.CALCULATED_TEMPERATURE_VARIABLE_CODE, ''))) {
-            const waterAlertLink = selection.append('a')
+            selection.append('a')
                 .attr('href', `${config.WATERALERT_SUBSCRIPTION}/?site_no=${siteno}&parm=${d.parameterCode.replace(config.CALCULATED_TEMPERATURE_VARIABLE_CODE, '')}`)
                 .attr('class', 'usa-tooltip usa-link wateralert-available')
                 .attr('data-position', 'left')
@@ -226,10 +225,28 @@ export const plotSeriesSelectTable = function(elem,
     });
 
     // Add option to plot second parameter
-    const secondParameterSelectionContainer = tableContainer.append('div')
-        .attr('id', 'select-second-parameter');
-    secondParameterSelectionContainer.append('div')
-        .attr('class', 'select-second-parameter-accordion usa-accordion')
-        .append('h2')
-            .attr('')
+    if (Object.entries(availableParameterCodes).length > 1) {
+        console.log('availableParameterCodes ', availableParameterCodes)
+    }
+    const secondParameterSelectionAccordion = tableContainer.append('div')
+        .attr('id', 'select-second-parameter-accordion')
+        .attr('class', 'wdfn-accordion select-second-parameter-accordion usa-accordion');
+    secondParameterSelectionAccordion.append('h2')
+        .attr('class', 'usa-accordion__heading')
+        .append('button')
+            .attr('class', 'usa-accordion__button')
+            .attr('aria-expanded', 'true')
+            .attr('aria-controls', 'select-second-parameter-container')
+            .attr('ga-on', 'click')
+            .attr('ga-event-category', 'selectTimeSeries')
+            .attr('ga-event-action', 'interactionWithSecondParameterSelectAccordion')
+            .text('Add second time series to graph');
+    secondParameterSelectionAccordion.append('div')
+        .attr('id', 'select-second-parameter-container')
+        .attr('class', 'usa-accordion__content usa-prose')
+        .append('p')
+            .text('available parameters');
+
+    // Active the USWDS accordion - required when the component is added after the initial Document Object Model is created.
+    components.accordion.on(secondParameterSelectionAccordion.node());
 };
