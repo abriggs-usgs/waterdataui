@@ -102,12 +102,12 @@ export const plotSeriesSelectTable = function(elem,
     const lastTable = elem.select('#select-time-series table');
     console.log('elem ', elem)
     const scrollTop = lastTable.size() ? lastTable.property('scrollTop') : null;
+
     elem.select('#select-time-series').remove();
 
     if (!availableParameterCodes.length) {
         return;
     }
-
 
     const columnHeaders = ['   ', 'Parameter', 'Preview', '#', 'Period of Record', 'WaterAlert'];
     const tableContainer = elem.append('div')
@@ -130,7 +130,6 @@ export const plotSeriesSelectTable = function(elem,
             .enter().append('th')
                 .attr('scope', 'col')
                 .text(d => d);
-
     table.append('tbody')
         .attr('class', 'usa-fieldset')
         .selectAll('tr')
@@ -149,7 +148,7 @@ export const plotSeriesSelectTable = function(elem,
             }
         })
         .call(tr => {
-            let paramSelectCol = tr.append('td');
+            const paramSelectCol = tr.append('td');
             paramSelectCol.append('input')
                 .attr('id', param => `time-series-select-radio-button-${param.parameterCode}`)
                 .attr('type', 'radio')
@@ -159,7 +158,7 @@ export const plotSeriesSelectTable = function(elem,
                 .property('checked', param => param.selected ? true : null);
             paramSelectCol.append('label')
                .attr('class', 'usa-radio__label');
-            let paramCdCol = tr.append('th')
+            const paramCdCol = tr.append('th')
                 .attr('scope', 'row');
             paramCdCol.append('span')
                 .text(param => param.description)
@@ -174,7 +173,8 @@ export const plotSeriesSelectTable = function(elem,
                 .text(param => param.timeSeriesCount);
             tr.append('td')
                 .style('white-space', 'nowrap')
-                .text(param => `${config.uvPeriodOfRecord[param.parameterCode].begin_date} to ${config.uvPeriodOfRecord[param.parameterCode].end_date}`);
+                .text(param => `${config.uvPeriodOfRecord[param.parameterCode.replace(config.CALCULATED_TEMPERATURE_VARIABLE_CODE, '')].begin_date} 
+                        to ${config.uvPeriodOfRecord[param.parameterCode.replace(config.CALCULATED_TEMPERATURE_VARIABLE_CODE, '')].end_date}`);
             tr.append('td')
                 .append('div')
                 .attr('class', 'wateralert-link');
@@ -182,22 +182,23 @@ export const plotSeriesSelectTable = function(elem,
 
     // WaterAlert does not support every parameter code, so lets take that into account when adding the links
     table.selectAll('.wateralert-link').each(function(d) {
-        const acceptableWaterAlertParameterCodes = ['00060', '00055', '72321', '00062', '00065', '62610', '62614',
-            '62615', '62616','62617', '62619', '62620', '63160', '72020','00095', '62611', '72019', '72020',
-            '72147', '72150', '72192', '72322', '72255','72279', '00010', '00011', '00095', '00300', '00400',
-            '00480', '63680', '72213', '99133','31720', '31721', '31722', '31723', '31724', '31725', '31726',
-            '31727', '31728', '31729','32319','32321', '00045', '99064', '99067'];
+
+        // Allow the converted temperature codes to have a link to the non-converted Wateralert form
+        const allTemperatureParameters = config.TEMPERATURE_PARAMETERS.celsius.concat(config.TEMPERATURE_PARAMETERS.fahrenheit);
+        const convertedTemperatureCodes = allTemperatureParameters.map(function(code) {
+            return code.replace(`${code}`, `${code}${config.CALCULATED_TEMPERATURE_VARIABLE_CODE}`);
+        });
 
         let selection = select(this);
 
-        if (acceptableWaterAlertParameterCodes.includes(d.parameterCode)) {
-            selection.append('a')
-                .attr('href', `${config.WATERALERT_SUBSCRIPTION}/?site_no=${siteno}&parm=${d.parameterCode}`)
+        if (config.WATER_ALERT_PARAMETER_CODES.includes(d.parameterCode.replace(config.CALCULATED_TEMPERATURE_VARIABLE_CODE, ''))) {
+            const waterAlertLink = selection.append('a')
+                .attr('href', `${config.WATERALERT_SUBSCRIPTION}/?site_no=${siteno}&parm=${d.parameterCode.replace(config.CALCULATED_TEMPERATURE_VARIABLE_CODE, '')}`)
                 .attr('class', 'usa-tooltip usa-link wateralert-available')
                 .attr('data-position', 'left')
                 .attr('data-classes', 'width-full tablet:width-auto')
                 .attr('title', 'Subscribe to text or email alerts based on thresholds that you set')
-                .text('Subscribe');
+                .text(convertedTemperatureCodes.includes(d.parameterCode) ? 'Alerts in C' : 'Subscribe');
         } else {
             selection.attr('class', 'usa-tooltip wateralert-unavailable')
                 .attr('data-position', 'left')
