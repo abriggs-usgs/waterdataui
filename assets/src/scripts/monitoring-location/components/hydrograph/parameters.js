@@ -9,6 +9,7 @@ import config from 'ui/config';
 import {appendInfoTooltip} from 'd3render/info-tooltip';
 
 import {Actions} from 'ml/store/instantaneous-value-time-series-data';
+import {getCurrentParmCd} from 'ml/selectors/time-series-selector';
 
 import {MASK_DESC} from './selectors/drawing-data';
 import {SPARK_LINE_DIM, CIRCLE_RADIUS_SINGLE_PT} from './selectors/layout';
@@ -224,10 +225,16 @@ export const plotSeriesSelectTable = function(elem,
         }
     });
 
+
+
+
+
+
+
+
     // Add option to plot second parameter
     if (Object.entries(availableParameterCodes).length > 1) {
-        console.log('availableParameterCodes ', availableParameterCodes)
-    }
+
     const secondParameterSelectionAccordion = tableContainer.append('div')
         .attr('id', 'select-second-parameter-accordion')
         .attr('class', 'wdfn-accordion select-second-parameter-accordion usa-accordion');
@@ -241,12 +248,26 @@ export const plotSeriesSelectTable = function(elem,
             .attr('ga-event-category', 'selectTimeSeries')
             .attr('ga-event-action', 'interactionWithSecondParameterSelectAccordion')
             .text('Add second time series to graph');
-    secondParameterSelectionAccordion.append('div')
+    const secondParameterSelectContainer = secondParameterSelectionAccordion.append('div')
         .attr('id', 'select-second-parameter-container')
-        .attr('class', 'usa-accordion__content usa-prose')
-        .append('p')
-            .text('available parameters');
+        .attr('class', 'usa-accordion__content usa-prose');
+
+        const userSelectedParameterCode = getCurrentParmCd(store.getState());
+
+        secondParameterSelectContainer.append('ul')
+            .attr('class', 'usa-list usa-list--unstyled');
+        Object.entries(availableParameterCodes).forEach(code => {
+            const parameterDetails = code[1];
+            // Don't add the selected code from the main selection list to this one.
+            if (parameterDetails.parameterCode !== userSelectedParameterCode) {
+                secondParameterSelectContainer.append('li')
+                    .text(`${parameterDetails.parameterCode} - ${parameterDetails.description}`);
+            }            
+        });
+        secondParameterSelectContainer.append('li')
+            .text('None - Don\'t add another time series');
 
     // Active the USWDS accordion - required when the component is added after the initial Document Object Model is created.
     components.accordion.on(secondParameterSelectionAccordion.node());
+    }
 };
