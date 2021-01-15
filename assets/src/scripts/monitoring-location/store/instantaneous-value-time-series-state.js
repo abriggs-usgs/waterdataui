@@ -31,6 +31,18 @@ const setCurrentIVVariable = function(variableID) {
 };
 
 /*
+ * Synchronous action to set the selected variable ID for plotting a second time series on the IV graph
+ * @param {String} variableID
+ * @return {Object} - Redux action
+ */
+const setCurrentIVSecondVariable = function(variableID) {
+    return {
+        type: 'SET_CURRENT_IV_SECOND_VARIABLE',
+        variableID
+    };
+};
+
+/*
  * Synchronous action to set the selected method ID (uniquely identifies the IV time series).
  * Some variables have more than one IV time series. The method ID distinguishes these
  * @param {String} methodID
@@ -224,6 +236,12 @@ export const ivTimeSeriesStateReducer = function(ivTimeSeriesState={}, action) {
                 currentIVVariableID: action.variableID
             };
 
+        case 'SET_CURRENT_IV_SECOND_VARIABLE':
+            return {
+                ...ivTimeSeriesState,
+                currentIVSecondVariableID: action.variableID
+            };
+
         case 'SET_CURRENT_IV_METHOD_ID':
             return {
                 ...ivTimeSeriesState,
@@ -306,6 +324,7 @@ export const ivTimeSeriesStateReducer = function(ivTimeSeriesState={}, action) {
 export const Actions = {
     setIVTimeSeriesVisibility,
     setCurrentIVVariable,
+    setCurrentIVSecondVariable,
     setCurrentIVMethodID,
     setCurrentIVDateRange,
     setCustomIVTimeRange,

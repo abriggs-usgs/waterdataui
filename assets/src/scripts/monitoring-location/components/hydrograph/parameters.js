@@ -9,7 +9,6 @@ import config from 'ui/config';
 import {appendInfoTooltip} from 'd3render/info-tooltip';
 
 import {Actions} from 'ml/store/instantaneous-value-time-series-data';
-import {getCurrentParmCd} from 'ml/selectors/time-series-selector';
 
 import {MASK_DESC} from './selectors/drawing-data';
 import {SPARK_LINE_DIM, CIRCLE_RADIUS_SINGLE_PT} from './selectors/layout';
@@ -108,19 +107,18 @@ const addSecondParameterSelection =  function(availableParameterCodes, element) 
         .attr('class', 'usa-fieldset second-parameter-select-fieldset');
 
     Object.entries(availableParameterCodes).forEach(code => {
-        // Don't add the selected code from the main selection list to this one.
         const parameterDetails = code[1];
-        if (parameterDetails.selected !== true) {
+        if (parameterDetails.selected !== true) { // Don't add the selected code from the main selection list to this one.
             secondParameterFieldSet.append('div')
                 .attr('class', 'usa-radio')
                 .append('input')
                 .attr('class', 'usa-radio__input');
             secondParameterFieldSet.append('input')
-                .attr('id', `parameter-${parameterDetails.parameterCode}`)
+                .attr('id', `selection-second-parameter-${parameterDetails.parameterCode}`)
                 .attr('type', 'radio')
                 .attr('name', 'second-parameter-selection')
                 .attr('class', 'usa-radio__input')
-                .attr('value', parameterDetails.parameterCode);
+                .attr('value', parameterDetails.variableID);
             // .property('checked', parameterDetails.selected ? true : null);
             secondParameterFieldSet.append('label')
                 .attr('class', 'usa-radio__label second-parameter-selection')
@@ -136,7 +134,7 @@ const addSecondParameterSelection =  function(availableParameterCodes, element) 
         .append('input')
         .attr('class', 'usa-radio__input');
     secondParameterFieldSet.append('input')
-        .attr('id', 'parameter-none')
+        .attr('id', 'selection-second-parameter-none')
         .attr('type', 'radio')
         .attr('name', 'second-parameter-selection')
         .attr('class', 'usa-radio__input')
