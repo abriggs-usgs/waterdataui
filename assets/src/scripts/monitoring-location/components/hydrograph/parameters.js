@@ -250,22 +250,60 @@ export const plotSeriesSelectTable = function(elem,
             .text('Add second time series to graph');
     const secondParameterSelectContainer = secondParameterSelectionAccordion.append('div')
         .attr('id', 'select-second-parameter-container')
-        .attr('class', 'usa-accordion__content usa-prose');
+        .attr('class', 'usa-accordion__content');
+    const secondParameterFieldSet = secondParameterSelectContainer.append('form')
+        .attr('class', 'usa-form')
+        .append('fieldset')
+            .attr('class', 'usa-fieldset second-parameter-select-fieldset');
 
-        const userSelectedParameterCode = getCurrentParmCd(store.getState());
 
-        secondParameterSelectContainer.append('ul')
-            .attr('class', 'usa-list usa-list--unstyled');
+        //
+        // secondParameterSelectContainer.append('ul')
+        //     .attr('class', 'usa-list usa-list--unstyled');
+        // const userSelectedParameterCode = getCurrentParmCd(store.getState());
         Object.entries(availableParameterCodes).forEach(code => {
             const parameterDetails = code[1];
+            secondParameterFieldSet.append('div')
+                .attr('class', 'usa-radio')
+                .append('input')
+                    .attr('class', 'usa-radio__input');
+            secondParameterFieldSet.append('input')
+                .attr('id', `parameter-${parameterDetails.parameterCode}`)
+                .attr('type', 'radio')
+                .attr('name', 'second-parameter-selection')
+                .attr('class', 'usa-radio__input')
+                .attr('value', parameterDetails.parameterCode)
+                // .property('checked', parameterDetails.selected ? true : null);
+            secondParameterFieldSet.append('label')
+                .attr('class', 'usa-radio__label second-parameter-selection')
+                .attr('for', `parameter-${parameterDetails.parameterCode}`)
+                // .property('disabled', `${parameterDetails.selected ? 'true' : '' }`)
+                .property('disabled', 'true')
+                .text(`${parameterDetails.description}`);
+           
+
+
             // Don't add the selected code from the main selection list to this one.
-            if (parameterDetails.parameterCode !== userSelectedParameterCode) {
-                secondParameterSelectContainer.append('li')
-                    .text(`${parameterDetails.parameterCode} - ${parameterDetails.description}`);
-            }            
+            // if (parameterDetails.parameterCode !== userSelectedParameterCode) {
+            //     secondParameterSelectContainer.append('li')
+            //         .text(`${parameterDetails.parameterCode} - ${parameterDetails.description}`);
+            // }
         });
-        secondParameterSelectContainer.append('li')
-            .text('None - Don\'t add another time series');
+        secondParameterFieldSet.append('div')
+            .attr('class', 'usa-radio')
+            .append('input')
+            .attr('class', 'usa-radio__input');
+        secondParameterFieldSet.append('input')
+            .attr('id', 'parameter-none')
+            .attr('type', 'radio')
+            .attr('name', 'second-parameter-selection')
+            .attr('class', 'usa-radio__input')
+            .attr('value', 'none')
+            .property('checked', true);
+        secondParameterFieldSet.append('label')
+            .attr('class', 'usa-radio__label second-parameter-selection')
+            .attr('for', 'parameter-none')
+            .text('Don\'t add another time series');
 
     // Active the USWDS accordion - required when the component is added after the initial Document Object Model is created.
     components.accordion.on(secondParameterSelectionAccordion.node());
