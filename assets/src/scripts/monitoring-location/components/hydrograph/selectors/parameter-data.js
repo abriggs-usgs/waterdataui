@@ -1,7 +1,7 @@
 import {createSelector} from 'reselect';
 
 import {sortedParameters} from 'ui/utils';
-import {getCurrentVariableID, getTimeSeries, getVariables} from 'ml/selectors/time-series-selector';
+import {getCurrentVariableID, getCurrentIVSecondVariableID, getTimeSeries, getVariables} from 'ml/selectors/time-series-selector';
 
 /**
  * Returns a Redux selector function which returns an sorted array of metadata
@@ -12,11 +12,13 @@ import {getCurrentVariableID, getTimeSeries, getVariables} from 'ml/selectors/ti
  *      @prop {Boolean} selected - True if this is the currently selected parameter
  *      @prop {Number} timeSeriesCount - count of unique time series for this parameter
  */
-export const getAvailableParameterCodes = createSelector(
+export const
+    getAvailableParameterCodes = createSelector(
     getVariables,
     getTimeSeries,
     getCurrentVariableID,
-    (variables, timeSeries, currentVariableID) => {
+    getCurrentIVSecondVariableID,
+    (variables, timeSeries, currentVariableID, currentIVSecondVariableID) => {
         if (!variables) {
             return [];
         }
@@ -31,6 +33,7 @@ export const getAvailableParameterCodes = createSelector(
                     parameterCode: variable.variableCode.value,
                     description: variable.variableDescription,
                     selected: currentVariableID === variable.oid,
+                    secondParameterSelected: currentIVSecondVariableID === variable.oid,
                     timeSeriesCount: seriesList.filter(ts => {
                         return ts.tsKey === 'current:P7D' && ts.variable === variable.oid;
                     }).length

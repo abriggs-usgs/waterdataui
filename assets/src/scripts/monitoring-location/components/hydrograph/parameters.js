@@ -122,9 +122,7 @@ const addSecondParameterSelection =  function(store, availableParameterCodes, el
                 .attr('value', parameterDetails.variableID)
             // .property('checked', parameterDetails.selected ? true : null);
                 .on('click', function() {
-                        // if (!param.selected) {
-                            store.dispatch(StateActions.setCurrentIVSecondVariable(parameterDetails.variableID));
-                        // }
+                    store.dispatch(StateActions.setCurrentIVSecondVariable(parameterDetails.variableID));
                 });
             secondParameterFieldSet.append('label')
                 .attr('class', 'usa-radio__label second-parameter-selection')

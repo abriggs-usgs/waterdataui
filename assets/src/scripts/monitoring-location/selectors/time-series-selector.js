@@ -27,6 +27,8 @@ export const getUserInputsForSelectingTimespan = state => state.ivTimeSeriesStat
 
 export const getCurrentVariableID = state => state.ivTimeSeriesState.currentIVVariableID;
 
+export const getCurrentIVSecondVariableID = state => state.ivTimeSeriesState.currentIVSecondVariableID;
+
 export const getCurrentMethodID = state => state.ivTimeSeriesState.currentIVMethodID;
 
 export const getCurrentDateRange = (state) => {
