@@ -87,8 +87,7 @@ export const addSparkLine = function(svgSelection, {seriesLineSegments, scales})
 
 
 /*
-* Adds a user interface element that allow the user to select a second time series to
-* plot on the graph
+* Adds a user interface element that allows the user to select a second time series to plot on the graph.
 * @param {Object} - store, a complex object that represents the current state of the application
 * @param {Object} - availableParameterCodes, contains parameter codes and related details used in the parameter table
 * @param {Object} - element, the HTML to which the secondary parameter selection group will be appended.

@@ -36,7 +36,6 @@ const setCurrentIVVariable = function(variableID) {
  * @return {Object} - Redux action
  */
 const setCurrentIVSecondVariable = function(variableID) {
-    console.log('ran setCurrentIVSecondVariable', variableID)
     return {
         type: 'SET_CURRENT_IV_SECOND_VARIABLE',
         variableID
