@@ -13,6 +13,7 @@ import {convertCelsiusCollectionsToFahrenheitAndMerge, isPeriodCustom, parsePeri
 import {
     getCurrentDateRange,
     getCurrentParmCd, getCustomTimeRange, getRequestTimeRange,
+    getCurrentIVSecondVariableID,
     getTimeSeriesCollectionIds,
     getTsRequestKey,
     hasTimeSeries
@@ -115,8 +116,13 @@ const retrieveIVTimeSeries = function(siteno) {
 
                 // Update the application state
                 dispatch(ivTimeSeriesStateActions.setIVTimeSeriesVisibility('current', true));
-                const variable = getCurrentVariableId(collection.timeSeries || {}, collection.variables || {});
-                dispatch(ivTimeSeriesStateActions.setCurrentIVVariable(variable));
+                const variableID = getCurrentVariableId(collection.timeSeries || {}, collection.variables || {});
+                // If the primary parameter selection is changed to what is currently the secondary parameter,
+                // set the secondary parameter to 'no selection'
+                if (variableID === getCurrentIVSecondVariableID(currentState)) {
+                    dispatch(ivTimeSeriesStateActions.setCurrentIVSecondVariable('none'));
+                }
+                dispatch(ivTimeSeriesStateActions.setCurrentIVVariable(variableID));
                 dispatch(floodInundationActions.setGageHeight(getLatestValue(collection, GAGE_HEIGHT_CD)));
             },
             () => {
@@ -337,10 +343,15 @@ const retrieveUserRequestedIVDataForDateRange = function(siteno, startDateStr, e
 * @return {Function} when returns a promise.
  */
 const updateIVCurrentVariableAndRetrieveTimeSeries = function(siteno, variableID) {
-
     return function(dispatch, getState) {
-        dispatch(ivTimeSeriesStateActions.setCurrentIVVariable(variableID));
         const state = getState();
+        // If the primary parameter selection is changed to what is currently the secondary parameter,
+        // set the secondary parameter to 'no selection'
+        if (variableID === getCurrentIVSecondVariableID(state)) {
+            dispatch(ivTimeSeriesStateActions.setCurrentIVSecondVariable('none'));
+        }
+        dispatch(ivTimeSeriesStateActions.setCurrentIVVariable(variableID));
+
         const currentDateRange = getCurrentDateRange(state);
 
         if (currentDateRange === 'custom') {
