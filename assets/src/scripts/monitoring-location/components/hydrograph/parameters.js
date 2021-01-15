@@ -14,6 +14,8 @@ import {Actions as StateActions} from 'ml/store/instantaneous-value-time-series-
 import {MASK_DESC} from './selectors/drawing-data';
 import {SPARK_LINE_DIM, CIRCLE_RADIUS_SINGLE_PT} from './selectors/layout';
 
+import {getCurrentIVSecondVariableID} from 'ml/selectors/time-series-selector';
+
 /**
  * Draw a sparkline in a selected SVG element
  *
@@ -86,6 +88,21 @@ export const addSparkLine = function(svgSelection, {seriesLineSegments, scales})
 
 
 const addSecondParameterSelection =  function(store, availableParameterCodes, element) {
+    const currentIVSecondVariableID = getCurrentIVSecondVariableID(store.getState());
+    const isNoSelectionCurrentlySelected = currentIVSecondVariableID === 'none';
+    const noParameterSelection = {
+        'noSelection' : {
+            'variableID': 'none',
+            'parameterCode': 'none',
+            'description': 'Do not add another time series',
+            'selected': false,
+            'secondParameterSelected': isNoSelectionCurrentlySelected
+        }
+    };
+    const availableParameterCodeWithNoneSelection = {
+        ...availableParameterCodes,
+        ...noParameterSelection
+    };
     const secondParameterSelectionAccordion = element.append('div')
         .attr('id', 'select-second-parameter-accordion')
         .attr('class', 'wdfn-accordion select-second-parameter-accordion usa-accordion');
@@ -107,48 +124,32 @@ const addSecondParameterSelection =  function(store, availableParameterCodes, el
         .append('fieldset')
         .attr('class', 'usa-fieldset second-parameter-select-fieldset');
 
-    Object.entries(availableParameterCodes).forEach(code => {
+    Object.entries(availableParameterCodeWithNoneSelection).forEach(code => {
         const parameterDetails = code[1];
-        if (parameterDetails.selected !== true) { // Don't add the selected code from the main selection list to this one.
-            secondParameterFieldSet.append('div')
-                .attr('class', 'usa-radio')
-                .append('input')
-                .attr('class', 'usa-radio__input');
-            secondParameterFieldSet.append('input')
-                .attr('id', `second-parameter-selection-${parameterDetails.parameterCode}`)
-                .attr('type', 'radio')
-                .attr('name', 'second-parameter-selection')
-                .attr('class', 'usa-radio__input')
-                .attr('value', parameterDetails.variableID)
-            // .property('checked', parameterDetails.selected ? true : null);
-                .on('click', function() {
+        secondParameterFieldSet.append('div')
+            .attr('class', 'usa-radio')
+            .append('input')
+            .attr('class', 'usa-radio__input');
+        secondParameterFieldSet.append('input')
+            .attr('id', `second-parameter-selection-${parameterDetails.parameterCode}`)
+            .attr('type', 'radio')
+            .attr('name', 'second-parameter-selection')
+            .attr('class', 'usa-radio__input')
+            .attr('value', parameterDetails.variableID)
+            .property('disabled', `${parameterDetails.selected ? 'true' : '' }`)
+            .property('checked', parameterDetails.secondParameterSelected ? true : null)
+            .on('click', function() {
+                if (!parameterDetails.secondParameterSelected) {
                     store.dispatch(StateActions.setCurrentIVSecondVariable(parameterDetails.variableID));
-                });
-            secondParameterFieldSet.append('label')
-                .attr('class', 'usa-radio__label second-parameter-selection')
-                .attr('for', `second-parameter-selection-${parameterDetails.parameterCode}`)
-                // this should work but will not
-                // .property('disabled', `${parameterDetails.selected ? 'true' : '' }`)
-                .property('disabled', 'true')
-                .text(`${parameterDetails.description}`);
-        }
-    });
-    secondParameterFieldSet.append('div')
-        .attr('class', 'usa-radio')
-        .append('input')
-        .attr('class', 'usa-radio__input');
-    secondParameterFieldSet.append('input')
-        .attr('id', 'second-parameter-selection-none')
-        .attr('type', 'radio')
-        .attr('name', 'second-parameter-selection')
-        .attr('class', 'usa-radio__input')
-        .attr('value', 'none')
-        .property('checked', true);
-    secondParameterFieldSet.append('label')
-        .attr('class', 'usa-radio__label second-parameter-selection')
-        .attr('for', 'second-parameter-selection-none')
-        .text('Don\'t add another time series');
+                }
+            });
+        secondParameterFieldSet.append('label')
+            .attr('class', 'usa-radio__label second-parameter-selection')
+            .attr('for', `second-parameter-selection-${parameterDetails.parameterCode}`)
+            .property('disabled', 'true')
+            .text(`${parameterDetails.selected ? `primary selection - ${parameterDetails.description}` : parameterDetails.description}`);
 
+    });
     // Active the USWDS accordion - required when the component is added after the initial Document Object Model is created.
     components.accordion.on(secondParameterSelectionAccordion.node());
 };
