@@ -86,7 +86,13 @@ export const addSparkLine = function(svgSelection, {seriesLineSegments, scales})
 };
 
 
-
+/*
+* Adds a user interface element that allow the user to select a second time series to
+* plot on the graph
+* @param {Object} - store, a complex object that represents the current state of the application
+* @param {Object} - availableParameterCodes, contains parameter codes and related details used in the parameter table
+* @param {Object} - element, the HTML to which the secondary parameter selection group will be appended.
+ */
 const addSecondParameterSelection =  function(store, availableParameterCodes, element) {
     const currentIVSecondVariableID = getCurrentIVSecondVariableID(store.getState());
     const isNoSelectionCurrentlySelected = currentIVSecondVariableID === 'none';
@@ -136,6 +142,9 @@ const addSecondParameterSelection =  function(store, availableParameterCodes, el
             .attr('name', 'second-parameter-selection')
             .attr('class', 'usa-radio__input')
             .attr('value', parameterDetails.variableID)
+            .attr('ga-on', 'click')
+            .attr('ga-event-category', 'selectTimeSeries')
+            .attr('ga-event-action', `selectSecondaryParameter-${parameterDetails.variableID}`)
             .property('disabled', `${parameterDetails.selected ? 'true' : '' }`)
             .property('checked', parameterDetails.secondParameterSelected ? true : null)
             .on('click', function() {
