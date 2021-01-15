@@ -36,6 +36,7 @@ const setCurrentIVVariable = function(variableID) {
  * @return {Object} - Redux action
  */
 const setCurrentIVSecondVariable = function(variableID) {
+    console.log('ran setCurrentIVSecondVariable', variableID)
     return {
         type: 'SET_CURRENT_IV_SECOND_VARIABLE',
         variableID
@@ -61,7 +62,6 @@ const setCurrentIVMethodID = function(methodID) {
  * @return {Object} - Redux action
  */
 const setCurrentIVDateRange = function(dateRange) {
-
     return {
         type: 'SET_CURRENT_IV_DATE_RANGE',
         dateRange

@@ -9,6 +9,7 @@ import config from 'ui/config';
 import {appendInfoTooltip} from 'd3render/info-tooltip';
 
 import {Actions} from 'ml/store/instantaneous-value-time-series-data';
+import {Actions as StateActions} from 'ml/store/instantaneous-value-time-series-state';
 
 import {MASK_DESC} from './selectors/drawing-data';
 import {SPARK_LINE_DIM, CIRCLE_RADIUS_SINGLE_PT} from './selectors/layout';
@@ -84,7 +85,7 @@ export const addSparkLine = function(svgSelection, {seriesLineSegments, scales})
 
 
 
-const addSecondParameterSelection =  function(availableParameterCodes, element) {
+const addSecondParameterSelection =  function(store, availableParameterCodes, element) {
     const secondParameterSelectionAccordion = element.append('div')
         .attr('id', 'select-second-parameter-accordion')
         .attr('class', 'wdfn-accordion select-second-parameter-accordion usa-accordion');
@@ -114,15 +115,20 @@ const addSecondParameterSelection =  function(availableParameterCodes, element) 
                 .append('input')
                 .attr('class', 'usa-radio__input');
             secondParameterFieldSet.append('input')
-                .attr('id', `selection-second-parameter-${parameterDetails.parameterCode}`)
+                .attr('id', `second-parameter-selection-${parameterDetails.parameterCode}`)
                 .attr('type', 'radio')
                 .attr('name', 'second-parameter-selection')
                 .attr('class', 'usa-radio__input')
-                .attr('value', parameterDetails.variableID);
+                .attr('value', parameterDetails.variableID)
             // .property('checked', parameterDetails.selected ? true : null);
+                .on('click', function() {
+                        // if (!param.selected) {
+                            store.dispatch(StateActions.setCurrentIVSecondVariable(parameterDetails.variableID));
+                        // }
+                });
             secondParameterFieldSet.append('label')
                 .attr('class', 'usa-radio__label second-parameter-selection')
-                .attr('for', `parameter-${parameterDetails.parameterCode}`)
+                .attr('for', `second-parameter-selection-${parameterDetails.parameterCode}`)
                 // this should work but will not
                 // .property('disabled', `${parameterDetails.selected ? 'true' : '' }`)
                 .property('disabled', 'true')
@@ -134,7 +140,7 @@ const addSecondParameterSelection =  function(availableParameterCodes, element) 
         .append('input')
         .attr('class', 'usa-radio__input');
     secondParameterFieldSet.append('input')
-        .attr('id', 'selection-second-parameter-none')
+        .attr('id', 'second-parameter-selection-none')
         .attr('type', 'radio')
         .attr('name', 'second-parameter-selection')
         .attr('class', 'usa-radio__input')
@@ -142,7 +148,7 @@ const addSecondParameterSelection =  function(availableParameterCodes, element) 
         .property('checked', true);
     secondParameterFieldSet.append('label')
         .attr('class', 'usa-radio__label second-parameter-selection')
-        .attr('for', 'parameter-none')
+        .attr('for', 'second-parameter-selection-none')
         .text('Don\'t add another time series');
 
     // Active the USWDS accordion - required when the component is added after the initial Document Object Model is created.
@@ -249,7 +255,7 @@ export const plotSeriesSelectTable = function(elem,
 
             // Add option to plot second parameter
             if (Object.entries(availableParameterCodes).length > 1) {
-                addSecondParameterSelection(availableParameterCodes, tableContainer);
+                addSecondParameterSelection(store, availableParameterCodes, tableContainer);
             }
         });
 
