@@ -93,3 +93,4 @@ export const getCurrentVariableUnitCode = createSelector(
 
 export const getQueryInformation = state => state.ivTimeSeriesData.queryInfo  || {};
 
+export const getAllMethods = state => state.ivTimeSeriesData.methods;

@@ -14,8 +14,8 @@ import {Actions as StateActions} from 'ml/store/instantaneous-value-time-series-
 import {MASK_DESC} from './selectors/drawing-data';
 import {SPARK_LINE_DIM, CIRCLE_RADIUS_SINGLE_PT} from './selectors/layout';
 
-import {getCurrentIVSecondVariableID, getShowIVTimeSeries} from 'ml/selectors/time-series-selector';
-import {drawMethodPicker} from "./method-picker";
+import {getCurrentIVSecondVariableID} from 'ml/selectors/time-series-selector';
+import {drawMethodPickerNEW} from './method-picker';
 
 /**
  * Draw a sparkline in a selected SVG element
@@ -94,7 +94,6 @@ export const addSparkLine = function(svgSelection, {seriesLineSegments, scales})
 * @param {Object} - element, the HTML to which the secondary parameter selection group will be appended.
  */
 const addSecondParameterSelection =  function(store, availableParameterCodes, element) {
-    console.log('availableParameterCodes ', availableParameterCodes)
     const currentIVSecondVariableID = getCurrentIVSecondVariableID(store.getState());
     const isNoSelectionCurrentlySelected = currentIVSecondVariableID === 'none';
     const noParameterSelection = {
@@ -104,13 +103,14 @@ const addSecondParameterSelection =  function(store, availableParameterCodes, el
             'description': 'Do not add another time series',
             'selected': false,
             'secondParameterSelected': isNoSelectionCurrentlySelected,
-            'availableMethods': 'none'
+            'availableMethods': []
         }
     };
     const availableParameterCodeWithNoneSelectionAdded = {
         ...availableParameterCodes,
         ...noParameterSelection
     };
+
     const secondParameterSelectionAccordion = element.append('div')
         .attr('id', 'select-second-parameter-accordion')
         .attr('class', 'wdfn-accordion select-second-parameter-accordion usa-accordion');
@@ -161,8 +161,10 @@ const addSecondParameterSelection =  function(store, availableParameterCodes, el
             .attr('for', `second-parameter-selection-${parameterDetails.parameterCode}`)
             .property('disabled', 'true')
             .text(`${parameterDetails.selected ? `primary selection - ${parameterDetails.description}` : parameterDetails.description}`);
-        secondParameterFieldSet.call(drawMethodPicker, store);
 
+        if (parameterDetails.availableMethods.length > 1) {
+            secondParameterFieldSet.call(drawMethodPickerNEW, store, 'second', parameterDetails);
+        }
     });
     // Active the USWDS accordion - required when the component is added after the initial Document Object Model is created.
     components.accordion.on(secondParameterSelectionAccordion.node());

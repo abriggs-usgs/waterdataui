@@ -267,6 +267,32 @@ export const getCurrentVariableTimeSeries = memoize((tsKey, period) => createSel
     }
 ));
 
+
+/**
+ * Returns a selector that, for a given tsKey:
+ * Selects all time series for the current time series variable and current date range.
+ * @param  {String} tsKey   Time-series key
+ * @param  {Object} state   Redux state
+ * @return {Object}         Time-series data
+ */
+export const getCurrentVariableTimeSeriesForSecondParameter = memoize((tsKey, period) => createSelector(
+    getTimeSeriesForTsKey(tsKey, period),
+    getCurrentIVSecondVariableID,
+    (timeSeries, variable) => {
+        let ts = {};
+        if (variable) {
+            Object.keys(timeSeries).forEach(key => {
+                const series = timeSeries[key];
+                if (series.variable === variable.oid) {
+                    ts[key] = series;
+                }
+            });
+        }
+        return ts;
+    }
+));
+
+
 /*
  * @param {String} tsKey - current or compare
  * @param {String} or null period - date range of interest specified as an ISO-8601 duration. If null, P7D is assumed
@@ -285,4 +311,3 @@ export const getAllMethodsForCurrentVariable = createSelector(
         });
     }
 );
-
