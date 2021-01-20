@@ -62,7 +62,6 @@ export const drawDataLine = function(group, {visible, lines, tsKey, xScale, ySca
                 .attr('class', `${tsKey}-mask-group`);
             const xSpan = xScale(xDomainEnd) - xScale(xDomainStart);
             const rectWidth = xSpan > 1 ? xSpan : 1;
-
             maskGroup.append('rect')
                 .attr('x', xScale(xDomainStart))
                 .attr('y', yTop)

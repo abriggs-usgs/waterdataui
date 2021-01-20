@@ -264,6 +264,14 @@ export const drawTimeSeriesGraph = function(elem, store, siteNo, showMLName, sho
             tsKey: () => 'compare',
             enableClip: () => true
         })))
+        .call(link(store, drawDataLines, createStructuredSelector({
+            visible: isVisible('currentIVSecondVariableID'),
+            tsLinesMap: getCurrentVariableLineSegments('compare'),
+            xScale: getMainXScale('compare'),
+            yScale: getMainYScale,
+            tsKey: () => 'compare',
+            enableClip: () => true
+        })))
         .call(link(store, plotAllMedianPoints, createStructuredSelector({
             visible: isVisible('median'),
             xscale: getMainXScale('current'),

@@ -131,6 +131,7 @@ const addSecondParameterSelection =  function(store, availableParameterCodes, el
 
     Object.entries(availableParameterCodeWithNoneSelection).forEach(code => {
         const parameterDetails = code[1];
+        console.log('parameterDetails ', parameterDetails)
         secondParameterFieldSet.append('div')
             .attr('class', 'usa-radio')
             .append('input')
@@ -148,7 +149,9 @@ const addSecondParameterSelection =  function(store, availableParameterCodes, el
             .property('checked', parameterDetails.secondParameterSelected ? true : null)
             .on('click', function() {
                 if (!parameterDetails.secondParameterSelected) {
+                    store.dispatch(StateActions.setIVTimeSeriesVisibility('secondParameterCurrent', parameterDetails.variableID !== 'none'));
                     store.dispatch(StateActions.setCurrentIVSecondVariable(parameterDetails.variableID));
+                    store.dispatch(StateActions.setCurrentIVMethodIDForSecondParameter('45807042')); // need to add the selection
                 }
             });
         secondParameterFieldSet.append('label')

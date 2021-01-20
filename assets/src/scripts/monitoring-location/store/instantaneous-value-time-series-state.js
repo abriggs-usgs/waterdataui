@@ -55,6 +55,14 @@ const setCurrentIVMethodID = function(methodID) {
     };
 };
 
+
+const setCurrentIVMethodIDForSecondParameter = function(methodID) {
+    return {
+        type: 'SET_CURRENT_IV_METHOD_ID_FOR_SECOND_PARAMETER',
+        methodID
+    };
+};
+
 /*
  * Synchronous action sets the date range kind of the IV data.
  * @param {String} dateRange - represents an ISO 8601 Duration or "custom"
@@ -247,6 +255,12 @@ export const ivTimeSeriesStateReducer = function(ivTimeSeriesState={}, action) {
                 currentIVMethodID: action.methodID
             };
 
+        case 'SET_CURRENT_IV_METHOD_ID_FOR_SECOND_PARAMETER':
+            return {
+                ...ivTimeSeriesState,
+                currentIVMethodIDForSecondParameter: action.methodID
+            };
+
         case 'SET_CURRENT_IV_DATE_RANGE':
             return {
                 ...ivTimeSeriesState,
@@ -325,6 +339,7 @@ export const Actions = {
     setCurrentIVVariable,
     setCurrentIVSecondVariable,
     setCurrentIVMethodID,
+    setCurrentIVMethodIDForSecondParameter,
     setCurrentIVDateRange,
     setCustomIVTimeRange,
     setUserInputsForSelectingTimespan,

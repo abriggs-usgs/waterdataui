@@ -31,6 +31,8 @@ export const getCurrentIVSecondVariableID = state => state.ivTimeSeriesState.cur
 
 export const getCurrentMethodID = state => state.ivTimeSeriesState.currentIVMethodID;
 
+export const getCurrentIVMethodIDForSecondParameter = state => state.ivTimeSeriesState.currentIVMethodIDForSecondParameter;
+
 export const getCurrentDateRange = (state) => {
     return state.ivTimeSeriesState.currentIVDateRange || null;
 };

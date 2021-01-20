@@ -56,7 +56,8 @@ export const configureStore = function(initialState) {
             showIVTimeSeries: {
                 current: true,
                 compare: false,
-                median: false
+                median: false,
+                secondParameterCurrent: false
             },
             currentIVDateRange: 'P7D',
             customIVTimeRange: null,
@@ -70,7 +71,8 @@ export const configureStore = function(initialState) {
                 mainTimeRangeSelectionButton: 'P7D',
                 customTimeRangeSelectionButton: 'days-input',
                 numberOfDaysFieldValue: ''
-            }
+            },
+            currentIVMethodIDForSecondParameter: null
         },
         dailyValueTimeSeriesState: {
             cursorOffset: null
