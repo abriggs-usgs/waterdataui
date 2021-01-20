@@ -15,6 +15,7 @@ import {MASK_DESC} from './selectors/drawing-data';
 import {SPARK_LINE_DIM, CIRCLE_RADIUS_SINGLE_PT} from './selectors/layout';
 
 import {getCurrentIVSecondVariableID, getShowIVTimeSeries} from 'ml/selectors/time-series-selector';
+import {drawMethodPicker} from "./method-picker";
 
 /**
  * Draw a sparkline in a selected SVG element
@@ -93,6 +94,7 @@ export const addSparkLine = function(svgSelection, {seriesLineSegments, scales})
 * @param {Object} - element, the HTML to which the secondary parameter selection group will be appended.
  */
 const addSecondParameterSelection =  function(store, availableParameterCodes, element) {
+    console.log('availableParameterCodes ', availableParameterCodes)
     const currentIVSecondVariableID = getCurrentIVSecondVariableID(store.getState());
     const isNoSelectionCurrentlySelected = currentIVSecondVariableID === 'none';
     const noParameterSelection = {
@@ -101,10 +103,11 @@ const addSecondParameterSelection =  function(store, availableParameterCodes, el
             'parameterCode': 'none',
             'description': 'Do not add another time series',
             'selected': false,
-            'secondParameterSelected': isNoSelectionCurrentlySelected
+            'secondParameterSelected': isNoSelectionCurrentlySelected,
+            'availableMethods': 'none'
         }
     };
-    const availableParameterCodeWithNoneSelection = {
+    const availableParameterCodeWithNoneSelectionAdded = {
         ...availableParameterCodes,
         ...noParameterSelection
     };
@@ -120,7 +123,7 @@ const addSecondParameterSelection =  function(store, availableParameterCodes, el
         .attr('ga-on', 'click')
         .attr('ga-event-category', 'selectTimeSeries')
         .attr('ga-event-action', 'interactionWithSecondParameterSelectAccordion')
-        .text(`Add second time series to graph ${getShowIVTimeSeries(store.getState).secondParameterCurrent === 'none' ? '': ' - selected'}`);
+        .text('Add second time series to graph');
     const secondParameterSelectContainer = secondParameterSelectionAccordion.append('div')
         .attr('id', 'select-second-parameter-container')
         .attr('class', 'usa-accordion__content');
@@ -129,7 +132,7 @@ const addSecondParameterSelection =  function(store, availableParameterCodes, el
         .append('fieldset')
         .attr('class', 'usa-fieldset second-parameter-select-fieldset');
 
-    Object.entries(availableParameterCodeWithNoneSelection).forEach(code => {
+    Object.entries(availableParameterCodeWithNoneSelectionAdded).forEach(code => {
         const parameterDetails = code[1];
         secondParameterFieldSet.append('div')
             .attr('class', 'usa-radio')
@@ -158,6 +161,7 @@ const addSecondParameterSelection =  function(store, availableParameterCodes, el
             .attr('for', `second-parameter-selection-${parameterDetails.parameterCode}`)
             .property('disabled', 'true')
             .text(`${parameterDetails.selected ? `primary selection - ${parameterDetails.description}` : parameterDetails.description}`);
+        secondParameterFieldSet.call(drawMethodPicker, store);
 
     });
     // Active the USWDS accordion - required when the component is added after the initial Document Object Model is created.

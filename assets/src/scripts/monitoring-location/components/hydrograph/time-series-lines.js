@@ -87,7 +87,7 @@ export const drawDataLine = function(group, {visible, lines, tsKey, xScale, ySca
  * Render a set of lines if visible using the scales. The tsKey string is used for various class names so that this element
  * can be styled by using the class name.
  * @param {Boolean} visible
- * @param {Array of Obect} - Each object is suitable for passing to drawDataLine
+ * @param {Array of Object} - Each object is suitable for passing to drawDataLine
  * @param {String} tsKey
  * @param {Object} xScale - D3 scale for the x axis
  * @param {Object} yScale - D3 scale for the y axis

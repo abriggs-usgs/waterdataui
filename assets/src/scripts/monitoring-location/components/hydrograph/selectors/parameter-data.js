@@ -36,7 +36,10 @@ export const
                     secondParameterSelected: currentIVSecondVariableID === variable.oid,
                     timeSeriesCount: seriesList.filter(ts => {
                         return ts.tsKey === 'current:P7D' && ts.variable === variable.oid;
-                    }).length
+                    }).length,
+                    availableMethods: (seriesList.filter(ts =>
+                        ts.tsKey === 'current:P7D' && ts.variable === variable.oid
+                    )).map(series => series.method)
                 };
             });
     }

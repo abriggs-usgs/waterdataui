@@ -13,13 +13,9 @@ import {Actions} from 'ml/store/instantaneous-value-time-series-state';
 import { } from './selectors/time-series-data';
 
 export const drawMethodPicker = function(elem, store) {
-    const pickerContainer = elem.insert('div', ':nth-child(2)')
+    const pickerContainer = elem.append('div')
         .attr('id', 'ts-method-select-container');
 
-    pickerContainer.append('label')
-        .attr('class', 'usa-label')
-        .attr('for', 'method-picker')
-        .text('Description');
     pickerContainer.append('select')
         .attr('class', 'usa-select')
         .attr('id', 'method-picker')

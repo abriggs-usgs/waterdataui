@@ -317,8 +317,10 @@ export const getLineSegments = memoize((tsKey, period) => createSelector(
     getPointsByTsKey(tsKey, period),
     getCurrentMethodID,
     (tsPoints, currentMethodID) => {
+        console.log('in getLineSegments period ', period)
         let seriesLines = {};
         Object.keys(tsPoints).forEach((tsId) => {
+            console.log('tsId ', tsId)
             const methodID = tsId.split(':')[0];
             const points = tsPoints[tsId];
             let lines = [];
