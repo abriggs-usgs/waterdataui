@@ -14,7 +14,7 @@ import {Actions as StateActions} from 'ml/store/instantaneous-value-time-series-
 import {MASK_DESC} from './selectors/drawing-data';
 import {SPARK_LINE_DIM, CIRCLE_RADIUS_SINGLE_PT} from './selectors/layout';
 
-import {getCurrentIVSecondVariableID} from 'ml/selectors/time-series-selector';
+import {getCurrentIVSecondVariableID, getShowIVTimeSeries} from 'ml/selectors/time-series-selector';
 
 /**
  * Draw a sparkline in a selected SVG element
@@ -120,7 +120,7 @@ const addSecondParameterSelection =  function(store, availableParameterCodes, el
         .attr('ga-on', 'click')
         .attr('ga-event-category', 'selectTimeSeries')
         .attr('ga-event-action', 'interactionWithSecondParameterSelectAccordion')
-        .text('Add second time series to graph');
+        .text(`Add second time series to graph ${getShowIVTimeSeries(store.getState).secondParameterCurrent === 'none' ? '': ' - selected'}`);
     const secondParameterSelectContainer = secondParameterSelectionAccordion.append('div')
         .attr('id', 'select-second-parameter-container')
         .attr('class', 'usa-accordion__content');
@@ -131,7 +131,6 @@ const addSecondParameterSelection =  function(store, availableParameterCodes, el
 
     Object.entries(availableParameterCodeWithNoneSelection).forEach(code => {
         const parameterDetails = code[1];
-        console.log('parameterDetails ', parameterDetails)
         secondParameterFieldSet.append('div')
             .attr('class', 'usa-radio')
             .append('input')
@@ -151,7 +150,7 @@ const addSecondParameterSelection =  function(store, availableParameterCodes, el
                 if (!parameterDetails.secondParameterSelected) {
                     store.dispatch(StateActions.setIVTimeSeriesVisibility('secondParameterCurrent', parameterDetails.variableID !== 'none'));
                     store.dispatch(StateActions.setCurrentIVSecondVariable(parameterDetails.variableID));
-                    store.dispatch(StateActions.setCurrentIVMethodIDForSecondParameter('45807042')); // need to add the selection
+                    store.dispatch(StateActions.setCurrentIVMethodIDForSecondParameter(45807042)); // need to add the selection
                 }
             });
         secondParameterFieldSet.append('label')
