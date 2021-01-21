@@ -103,7 +103,7 @@ const addSecondParameterSelection =  function(store, availableParameterCodes, el
             'description': 'Do not add another time series',
             'selected': false,
             'secondParameterSelected': isNoSelectionCurrentlySelected,
-            'availableMethods': []
+            'availableMethods': ['none']
         }
     };
     const availableParameterCodeWithNoneSelectionAdded = {
@@ -150,11 +150,15 @@ const addSecondParameterSelection =  function(store, availableParameterCodes, el
             .property('disabled', `${parameterDetails.selected ? 'true' : '' }`)
             .property('checked', parameterDetails.secondParameterSelected ? true : null)
             .on('click', function() {
-                if (!parameterDetails.secondParameterSelected) {
-                    store.dispatch(StateActions.setIVTimeSeriesVisibility('secondParameterCurrent', parameterDetails.variableID !== 'none'));
+                    store.dispatch(StateActions.setIVTimeSeriesVisibility('secondParameterCurrent', this.value !== 'none'));
                     store.dispatch(StateActions.setCurrentIVSecondVariable(parameterDetails.variableID));
-                    store.dispatch(StateActions.setCurrentIVMethodIDForSecondParameter(45807042)); // need to add the selection
-                }
+                    // if there is only one sampling method for the parameter, we will deal with it here, otherwise
+                    // we will take care of it in the method picker
+                console.log('parameterDetails.availableMethods.length', parameterDetails.availableMethods.length)
+                    if (parameterDetails.availableMethods.length <= 1) {
+                        console.log('parameterDetails.availableMethods[0] ', parameterDetails.availableMethods[0])
+                        store.dispatch(StateActions.setCurrentIVMethodIDForSecondParameter(parameterDetails.availableMethods[0])); // need to add the selection
+                    }
             });
         secondParameterFieldSet.append('label')
             .attr('class', 'usa-radio__label second-parameter-selection')

@@ -7,7 +7,7 @@ import {createStructuredSelector} from 'reselect';
 
 import{link}  from 'ui/lib/d3-redux';
 
-import {getCurrentMethodID, getAllMethodsForCurrentVariable} from 'ml/selectors/time-series-selector';
+import {getCurrentMethodID, getAllMethodsForCurrentVariable, getCurrentIVMethodIDForSecondParameter} from 'ml/selectors/time-series-selector';
 import {Actions} from 'ml/store/instantaneous-value-time-series-state';
 
 import {getAllMethods} from './selectors/time-series-data';
@@ -46,18 +46,18 @@ export const drawMethodPicker = function(elem, store) {
 };
 
 export const drawMethodPickerNEW = function(elem, store, whichParameterPicker, parameterDetails) {
-
     const pickerContainer = elem.append('div')
         .attr('id', `${whichParameterPicker}-ts-method-select-container-${parameterDetails.parameterCode}`);
     pickerContainer.append('select')
         .attr('class', 'usa-select')
         .attr('id', `${whichParameterPicker} - method-picker -${parameterDetails.parameterCode}`)
         .on('change', function() {
-            // store.dispatch(Actions.setCurrentIVMethodID(parseInt(select(this).property('value'))));
+            console.log('change in selection')
+            whichParameterPicker === 'firstParameter' ? store.dispatch(Actions.setCurrentIVMethodID(parseInt(select(this).property('value')))) :
+                store.dispatch(Actions.setCurrentIVMethodIDForSecondParameter(parseInt(select(this).property('value'))));
         })
         .call(link(store,function(elem, {methodList, currentMethodId}) {
-            console.log('method list ', methodList)
-
+            console.log('methodList ', methodList)
             const currentMethodIdString = parseInt(currentMethodId);
             elem.selectAll('option').remove();
             parameterDetails.availableMethods.forEach((method) => {
@@ -67,7 +67,8 @@ export const drawMethodPickerNEW = function(elem, store, whichParameterPicker, p
                     .attr('selected', currentMethodIdString === method.methodID ? true : null)
                     .node().value = method.methodID;
             });
-            // pickerContainer.property('hidden', methods.length <= 1);
+            console.log('getCurrentIVMethodIDForSecondParameter(store.getState', getCurrentIVMethodIDForSecondParameter(store.getState()))
+            // pickerContainer.property('hidden', getCurrentIVMethodIDForSecondParameter(store.getState()) !== method);
             // if (methods.length) {
             //     elem.dispatch('change');
             // }
