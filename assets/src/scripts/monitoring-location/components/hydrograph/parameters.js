@@ -154,9 +154,7 @@ const addSecondParameterSelection =  function(store, availableParameterCodes, el
                     store.dispatch(StateActions.setCurrentIVSecondVariable(parameterDetails.variableID));
                     // if there is only one sampling method for the parameter, we will deal with it here, otherwise
                     // we will take care of it in the method picker
-                console.log('parameterDetails.availableMethods.length', parameterDetails.availableMethods.length)
                     if (parameterDetails.availableMethods.length <= 1) {
-                        console.log('parameterDetails.availableMethods[0] ', parameterDetails.availableMethods[0])
                         store.dispatch(StateActions.setCurrentIVMethodIDForSecondParameter(parameterDetails.availableMethods[0])); // need to add the selection
                     }
             });

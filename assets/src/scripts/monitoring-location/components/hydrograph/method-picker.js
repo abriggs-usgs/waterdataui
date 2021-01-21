@@ -57,17 +57,35 @@ export const drawMethodPickerNEW = function(elem, store, whichParameterPicker, p
                 store.dispatch(Actions.setCurrentIVMethodIDForSecondParameter(parseInt(select(this).property('value'))));
         })
         .call(link(store,function(elem, {methodList, currentMethodId}) {
-            console.log('methodList ', methodList)
-            const currentMethodIdString = parseInt(currentMethodId);
-            elem.selectAll('option').remove();
-            parameterDetails.availableMethods.forEach((method) => {
+            let sortedMethodList = [];
+            let discontinuedMethods = [];
+          Object.entries(methodList).forEach(method => {
+              const methodDescription = method[1].methodDescription;
 
-                elem.append('option')
-                    .text(methodList[method].methodDescription ? `${methodList[method].methodDescription}` : `No details available for sampling method ${method}`)
-                    .attr('selected', currentMethodIdString === method.methodID ? true : null)
-                    .node().value = method.methodID;
+              if (methodDescription.includes('Discontinued') || methodDescription === '') {
+                  discontinuedMethods.push(method);
+              } else {
+                  sortedMethodList.push(method);
+              }
+          });
+            sortedMethodList.push(...discontinuedMethods);
+            console.log('parameterDetails.availableMethods ', parameterDetails.availableMethods)
+
+            sortedMethodList.forEach(listMethod => {
+                console.log('listMethod ', listMethod[0])
+                if (parameterDetails.availableMethods.includes(listMethod[0])) {
+                    console.log('includes ', listMethod[0])
+                const currentMethodIdString = parseInt(currentMethodId);
+                elem.selectAll('option').remove();
+                parameterDetails.availableMethods.forEach((method) => {
+                    elem.append('option')
+                        .text(methodList[method].methodDescription ? `${methodList[method].methodDescription}` : `No details available for sampling method ${method}`)
+                        .attr('selected', currentMethodIdString === method.methodID ? true : null)
+                        .node().value = method.methodID;
+                });
+            }
             });
-            console.log('getCurrentIVMethodIDForSecondParameter(store.getState', getCurrentIVMethodIDForSecondParameter(store.getState()))
+            // console.log('getCurrentIVMethodIDForSecondParameter(store.getState', getCurrentIVMethodIDForSecondParameter(store.getState()))
             // pickerContainer.property('hidden', getCurrentIVMethodIDForSecondParameter(store.getState()) !== method);
             // if (methods.length) {
             //     elem.dispatch('change');
