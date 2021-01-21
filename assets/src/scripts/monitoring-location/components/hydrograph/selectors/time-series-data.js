@@ -94,3 +94,27 @@ export const getCurrentVariableUnitCode = createSelector(
 export const getQueryInformation = state => state.ivTimeSeriesData.queryInfo  || {};
 
 export const getAllMethods = state => state.ivTimeSeriesData.methods;
+
+
+/*
+* Add comment
+ */
+
+export const getSortedMethodsList = memoize((methodIDs) => createSelector(
+    getAllMethods,
+    (methodList) => {
+        const availableMethodsWithDescriptions = methodIDs.map(methodID => methodList[methodID]);
+        let sortedMethodList = [];
+        Object.entries(availableMethodsWithDescriptions).forEach(method => {
+            const methodDescription = method[1].methodDescription;
+            // Put the 'discontinued' methods at the end of the list
+            methodDescription.includes('Discontinued') || methodDescription === '' ?
+                sortedMethodList.push(method) :
+                sortedMethodList.splice(0, 0, method);
+        });
+
+        return sortedMethodList;
+    })
+);
+
+

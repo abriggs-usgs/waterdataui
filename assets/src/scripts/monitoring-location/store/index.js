@@ -72,7 +72,7 @@ export const configureStore = function(initialState) {
                 customTimeRangeSelectionButton: 'days-input',
                 numberOfDaysFieldValue: ''
             },
-            currentIVMethodIDForSecondParameter: null
+            currentIVMethodIDForSecondParameter: 'none'
         },
         dailyValueTimeSeriesState: {
             cursorOffset: null

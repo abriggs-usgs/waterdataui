@@ -16,6 +16,7 @@ import {SPARK_LINE_DIM, CIRCLE_RADIUS_SINGLE_PT} from './selectors/layout';
 
 import {getCurrentIVSecondVariableID} from 'ml/selectors/time-series-selector';
 import {drawMethodPickerNEW} from './method-picker';
+import {getSortedMethodsList} from './selectors/time-series-data';
 
 /**
  * Draw a sparkline in a selected SVG element
@@ -134,6 +135,10 @@ const addSecondParameterSelection =  function(store, availableParameterCodes, el
 
     Object.entries(availableParameterCodeWithNoneSelectionAdded).forEach(code => {
         const parameterDetails = code[1];
+        const sortedMethodList = parameterDetails.availableMethods.length > 1 ?
+            getSortedMethodsList(parameterDetails.availableMethods)(store.getState()) :
+            Object.entries(parameterDetails.availableMethods);
+
         secondParameterFieldSet.append('div')
             .attr('class', 'usa-radio')
             .append('input')
@@ -151,12 +156,21 @@ const addSecondParameterSelection =  function(store, availableParameterCodes, el
             .property('checked', parameterDetails.secondParameterSelected ? true : null)
             .on('click', function() {
                     store.dispatch(StateActions.setIVTimeSeriesVisibility('secondParameterCurrent', this.value !== 'none'));
-                    store.dispatch(StateActions.setCurrentIVSecondVariable(parameterDetails.variableID));
-                    // if there is only one sampling method for the parameter, we will deal with it here, otherwise
-                    // we will take care of it in the method picker
-                    if (parameterDetails.availableMethods.length <= 1) {
-                        store.dispatch(StateActions.setCurrentIVMethodIDForSecondParameter(parameterDetails.availableMethods[0])); // need to add the selection
+                    store.dispatch(StateActions.setCurrentIVSecondVariable(select(this).property('value')));
+
+                    if (sortedMethodList.length <= 1) {
+                        store.dispatch(StateActions.setCurrentIVMethodIDForSecondParameter(parameterDetails.availableMethods[0]));
+                    } else {
+                        const defaultMethod = sortedMethodList[0][1].methodID;
+                        store.dispatch(StateActions.setCurrentIVMethodIDForSecondParameter(defaultMethod));
                     }
+
+                // secondParameterFieldSet.selectAll('.second-method-select-container').property('hidden', '');
+                // console.log('click select? ', secondParameterFieldSet.select('div#second-ts-method-select-container-00095'))
+                // secondParameterFieldSet.select('div#second-ts-method-select-container-00095').property('hidden', '')
+                        // secondParameterFieldSet.select(`#second-ts-method-select-container-${parameterDetails.parameterCode}`)
+                        //     .property('hidden', null);
+                    // }
             });
         secondParameterFieldSet.append('label')
             .attr('class', 'usa-radio__label second-parameter-selection')
@@ -165,7 +179,7 @@ const addSecondParameterSelection =  function(store, availableParameterCodes, el
             .text(`${parameterDetails.selected ? `primary selection - ${parameterDetails.description}` : parameterDetails.description}`);
 
         if (parameterDetails.availableMethods.length > 1) {
-            secondParameterFieldSet.call(drawMethodPickerNEW, store, 'second', parameterDetails);
+            secondParameterFieldSet.call(drawMethodPickerNEW, store, 'second', parameterDetails, sortedMethodList);
         }
     });
     // Active the USWDS accordion - required when the component is added after the initial Document Object Model is created.

@@ -37,9 +37,9 @@ export const
                     timeSeriesCount: seriesList.filter(ts => {
                         return ts.tsKey === 'current:P7D' && ts.variable === variable.oid;
                     }).length,
-                    availableMethods: (seriesList.filter(ts =>
+                    availableMethods: seriesList.filter(ts =>
                         ts.tsKey === 'current:P7D' && ts.variable === variable.oid
-                    )).map(series => series.method)
+                    ).map(series => series.method)
                 };
             });
     }
