@@ -10,8 +10,6 @@ import{link}  from 'ui/lib/d3-redux';
 import {getCurrentMethodID, getAllMethodsForCurrentVariable} from 'ml/selectors/time-series-selector';
 import {Actions} from 'ml/store/instantaneous-value-time-series-state';
 
-import {getAllMethods} from './selectors/time-series-data';
-
 export const drawMethodPicker = function(elem, store) {
     const pickerContainer = elem.insert('div', ':nth-child(2)')
         .attr('id', 'ts-method-select-container');
@@ -72,5 +70,3 @@ export const drawMethodPickerNEW = function(elem, store, whichParameterPicker, p
             currentMethodId: getCurrentMethodID
         })));
 };
-
-
