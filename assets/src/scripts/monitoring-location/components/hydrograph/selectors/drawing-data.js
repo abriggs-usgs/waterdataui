@@ -393,15 +393,25 @@ export const getLineSegmentsByParmCd = memoize((tsKey, period) => createSelector
  * Returns mapping of series ID to line segments for the currently selected variable.
  * @return {Object} - Keys are time series ids and values are the line segment arrays
  */
-export const getCurrentVariableLineSegments = memoize(tsKey => createSelector(
+export const getCurrentVariableLineSegments = memoize((tsKey, lineType) => createSelector(
     getCurrentVariableTimeSeries(tsKey),
-    getLineSegments(tsKey),
+    getLineSegments(tsKey, lineType),
     (seriesMap, linesMap) => {
         return Object.keys(seriesMap).reduce((visMap, sID) => {
                 visMap[sID] = linesMap[sID];
                 return visMap;
             }, {});
+    }
+));
 
+export const getCurrentVariableSecondParameterLineSegments = memoize(tsKey => createSelector(
+    getCurrentVariableTimeSeries(tsKey),
+    getLineSegments(tsKey),
+    (seriesMap, linesMap) => {
+        return Object.keys(seriesMap).reduce((visMap, sID) => {
+            visMap[sID] = linesMap[sID];
+            return visMap;
+        }, {});
     }
 ));
 

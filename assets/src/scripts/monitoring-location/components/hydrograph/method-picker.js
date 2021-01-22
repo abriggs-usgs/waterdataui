@@ -44,7 +44,6 @@ export const drawMethodPicker = function(elem, store) {
 };
 
 export const drawMethodPickerNEW = function(elem, store, whichParameterPicker, parameterDetails, sortedMethodList) {
-    console.log('called drawMethodPickerNEW')
     const pickerContainer = elem.append('div')
         .attr('id', `${whichParameterPicker}-ts-method-select-container-${parameterDetails.parameterCode}`)
         .attr('class', `${whichParameterPicker}-method-select-container`)

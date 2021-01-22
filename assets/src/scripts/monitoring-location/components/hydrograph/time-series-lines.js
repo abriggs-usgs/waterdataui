@@ -95,7 +95,7 @@ export const drawDataLine = function(group, {visible, lines, tsKey, xScale, ySca
  */
 export const drawDataLines = function(elem, {visible, tsLinesMap, tsKey, xScale, yScale, enableClip}, container) {
     container = container || elem.append('g');
-
+console.log('in drawDataLines tsKey ', tsKey)
     const elemId = `ts-${tsKey}-group`;
     container.selectAll(`#${elemId}`).remove();
     const tsLineGroup = container

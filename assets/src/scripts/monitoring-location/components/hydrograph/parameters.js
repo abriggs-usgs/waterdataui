@@ -165,9 +165,11 @@ const addSecondParameterSelection =  function(store, availableParameterCodes, el
                         store.dispatch(StateActions.setCurrentIVMethodIDForSecondParameter(defaultMethod));
                     }
 
-                secondParameterFieldSet.selectAll('.second-method-select-container').property('hidden', '');
-                console.log('click select? ', secondParameterFieldSet.select('div#second-ts-method-select-container-00095'))
-                // secondParameterFieldSet.select('div#second-ts-method-select-container-00095').property('hidden', '')
+                // secondParameterFieldSet.selectAll('.second-method-select-container')
+
+                // secondParameterFieldSet.select('div#second-ts-method-select-container-00095').attr('hidden', true);
+                // console.log('click select? ', secondParameterFieldSet.select('div#second-ts-method-select-container-00095'))
+
                         // secondParameterFieldSet.select(`#second-ts-method-select-container-${parameterDetails.parameterCode}`)
                         //     .property('hidden', null);
                     // }

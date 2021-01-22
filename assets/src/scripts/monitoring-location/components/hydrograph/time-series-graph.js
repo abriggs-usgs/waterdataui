@@ -250,7 +250,7 @@ export const drawTimeSeriesGraph = function(elem, store, siteNo, showMLName, sho
         .call(link(store, appendAxes, getAxes()))
         .call(link(store, drawDataLines, createStructuredSelector({
             visible: isVisible('current'),
-            tsLinesMap: getCurrentVariableLineSegments('current'),
+            tsLinesMap: getCurrentVariableLineSegments('current', 'primary'),
             xScale: getMainXScale('current'),
             yScale: getMainYScale,
             tsKey: () => 'current',
@@ -258,18 +258,18 @@ export const drawTimeSeriesGraph = function(elem, store, siteNo, showMLName, sho
         })))
         .call(link(store, drawDataLines, createStructuredSelector({
             visible: isVisible('compare'),
-            tsLinesMap: getCurrentVariableLineSegments('compare'),
+            tsLinesMap: getCurrentVariableLineSegments('compare', 'primary'),
             xScale: getMainXScale('compare'),
             yScale: getMainYScale,
             tsKey: () => 'compare',
             enableClip: () => true
         })))
         .call(link(store, drawDataLines, createStructuredSelector({
-            visible: isVisible('currentIVSecondVariableID'),
-            tsLinesMap: getCurrentVariableLineSegments('compare'),
-            xScale: getMainXScale('compare'),
+            visible: isVisible('secondParameterCurrent'),
+            tsLinesMap: getCurrentVariableLineSegments('current', 'secondary'),
+            xScale: getMainXScale('current'),
             yScale: getMainYScale,
-            tsKey: () => 'compare',
+            tsKey: () => 'current',
             enableClip: () => true
         })))
         .call(link(store, plotAllMedianPoints, createStructuredSelector({
